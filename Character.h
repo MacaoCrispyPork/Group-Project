@@ -19,7 +19,7 @@ public:
         body->setPosition(x,y);
         body->setFillColor(sf::Color::Cyan);
         body->setOrigin(r/2,r/2);
-        destination = sf::Vector2f(0.f,0.f);
+        destination = body->getPosition();
     }
     Character() {
         body = new sf::CircleShape();

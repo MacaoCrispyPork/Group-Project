@@ -19,7 +19,7 @@ public:
         this->xp = xp;
         body->setRadius(r);
         body->setPosition(x,y);
-        body->setFillColor(sf::Color::Cyan);
+        body->setFillColor(sf::Color::Green);
         body->setOrigin(r/2,r/2);
         destination = sf::Vector2f(0.f,0.f);
     }
@@ -32,7 +32,7 @@ public:
         this->isPlayer = 0;
         body->setRadius(0);
         body->setPosition(0,0);
-        body->setFillColor(sf::Color::Cyan);
+        body->setFillColor(sf::Color::Green);
         destination = sf::Vector2f(0.f,0.f);
     }
     void setPosition(Player* player) {

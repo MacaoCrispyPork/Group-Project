@@ -5,7 +5,7 @@
 #include <cmath>
 #include "Projectile.h"
 #include <ctime>
-
+//Haven't actually implemented this yet but shouldn't need many more changes
 class Sword : public Weapon
 {
 protected:

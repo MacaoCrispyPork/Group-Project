@@ -15,10 +15,10 @@ protected:
 public:
     Bow() {
         this->damage = 0;
-        this->fireRate =0;
-        this->lastAttack =clock();
+        this->fireRate = 0;
+        this->lastAttack = clock();
         this->projSize = 0;
-        this->projSpeed =0;
+        this->projSpeed = 0;
         this->range =0;
 
     }
