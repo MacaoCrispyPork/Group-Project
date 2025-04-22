@@ -5,8 +5,9 @@
 #include <cmath>
 #include "Projectile.h"
 #include <ctime>
+#include <optional>
 
-class Weapon 
+class Weapon
 {
 protected:
     int damage;
@@ -14,29 +15,27 @@ protected:
     int projSize;
     int projSpeed;
     clock_t lastAttack;
-    Projectile* projectile;
+    Projectile *projectile;
+
 public:
-    Weapon() {
-        damage = 0;
-        fireRate = 0;
-        projSpeed = 0;
-        projSize = 0;
-        lastAttack = clock();
-    }
-    Weapon(int damage, int fireRate, int projSize, int projSpeed) {
+    Weapon() : Weapon(0, 0, 0, 0) {}
+    Weapon(int damage, int fireRate, int projSize, int projSpeed)
+    {
         this->damage = damage;
         this->fireRate = fireRate;
         this->projSize = projSize;
         this->projSize = projSpeed;
         this->lastAttack = clock();
     }
-    virtual Projectile attack(sf::Vector2f position, sf::Vector2f destination, bool isPlayer) = 0;
 
+    virtual std::optional<Projectile> attack(sf::Vector2f position, sf::Vector2f destination, bool isPlayer) {};
 
-    clock_t getLastAttack() {
+    clock_t getLastAttack()
+    {
         return lastAttack;
     }
-    int getFireRate() {
+    int getFireRate()
+    {
         return fireRate;
     }
     //~Weapon();

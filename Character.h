@@ -3,45 +3,32 @@
 
 #include <SFML/Graphics.hpp>
 #include <cmath>
-
 #include "Entity.h"
 #include "Weapon.h"
-class Character : public Entity {
+
+class Character : public Entity
+{
 protected:
     int health;
-    Weapon* weapon;
+    Weapon *weapon;
+
 public:
-        Character(int r, int x, int y, int health, Weapon* weapon) {
-        body = new sf::CircleShape();
-        this->weapon = weapon;
-        this->health = health;
-        body->setRadius(r);
-        body->setPosition(x,y);
-        body->setFillColor(sf::Color::Cyan);
-        body->setOrigin(r/2,r/2);
-        destination = body->getPosition();
-    }
-    Character() {
-        body = new sf::CircleShape();
-        this->weapon = NULL;
-        this->health = 0; 
-        body->setRadius(0);
-        body->setPosition(0,0);
-        body->setFillColor(sf::Color::Cyan);
-        destination = sf::Vector2f(0.f,0.f);
-    }
+    Character(int r, int x, int y, sf::Color color, int speed, float destinationX, float destinationY, bool isPlayer, int health, Weapon *weapon) : Entity(r, x, y, color, speed, destinationX, destinationY, isPlayer), weapon(weapon), health(health) {}
+    Character() : Character(0, 0, 0, sf::Color::Cyan, 0, 0, 0, NULL, 0, nullptr) {}
 
-
-    Weapon* getWeapon() {
+    Weapon *getWeapon()
+    {
         return weapon;
     }
-    
-    void takeDamage(int damage) {
+
+    void takeDamage(int damage)
+    {
         this->health -= damage;
     }
 
-    /*~Character() {
-        delete body;
-    }*/
+    std::optional<Projectile> attack(sf::Vector2f destination)
+    {
+        return this->weapon->attack(this->getPosition(), destination, this->isPlayer);
+    }
 };
 #endif
