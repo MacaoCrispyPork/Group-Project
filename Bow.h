@@ -28,7 +28,7 @@ public:
     }
     std::optional<Projectile> attack(sf::Vector2f position, sf::Vector2f destination, bool isPlayer) override
     {
-        if (((float)(clock() - lastAttack) / CLOCKS_PER_SEC) < fireRate)
+        if (((float)(clock() - lastAttack) / CLOCKS_PER_SEC) > fireRate)
         {
             this->lastAttack = clock();
             sf::Vector2f endpoint = calculateRange(position, destination, range);
