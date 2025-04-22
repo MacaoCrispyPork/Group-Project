@@ -91,7 +91,7 @@ public:
             for (int i = 0; i < 10; i++) {
                 all_projectile[i]->move(all_projectile[i]->getDestination());
             }
-            
+            //Deleting projectile once it reaches within speed distance of its destination
             for (int i = 0; i < 10; i++) {
                 if (std::sqrt((all_projectile[i]->getPosition().x-all_projectile[i]->getDestination().x)*(all_projectile[i]->getPosition().x-all_projectile[i]->getDestination().x)+(all_projectile[i]->getPosition().y-all_projectile[i]->getDestination().y)*(all_projectile[i]->getPosition().y-all_projectile[i]->getDestination().y)) < all_projectile[i]->getSpeed()) {
                     delete all_projectile[i];

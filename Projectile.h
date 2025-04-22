@@ -41,17 +41,7 @@ public:
         destination = sf::Vector2f(0.f,0.f);
     }
 
-    void move(sf::Vector2f finish) {
-        sf::Vector2f movement = finish - body->getPosition();
-        if (movement.x != 0.f || movement.y != 0.f) {
-            float length = std::sqrt(movement.x*movement.x + movement.y*movement.y);
-            movement /= length;
-            movement *= speed; 
-        }
-        if (std::sqrt((body->getPosition().x-finish.x)*(body->getPosition().x-finish.x)+(body->getPosition().y-finish.y)*(body->getPosition().y-finish.y)) > speed/2) {
-            body->move(movement);
-        }
-    }
+
     std::string getType() {
         return "Projectile";
     }

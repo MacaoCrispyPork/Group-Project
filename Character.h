@@ -40,7 +40,7 @@ public:
         this->health -= damage;
     }
 
-    /*~Chaxracter() {
+    /*~Character() {
         delete body;
     }*/
 };
