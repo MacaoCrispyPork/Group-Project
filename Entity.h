@@ -14,6 +14,7 @@ protected:
     bool isPlayer;
 
 public:
+    // To-Do: remove x, y, destinationX, destinationY and just take position and destination vectors directly
     Entity(int r, int x, int y, sf::Color color, int speed, float destinationX, float destinationY, bool isPlayer): speed(speed), isPlayer(isPlayer)
     {
         body = new sf::CircleShape();
@@ -36,17 +37,12 @@ public:
     {
         // Creates a vector movement in the direction of destination
         sf::Vector2f movement = finish - body->getPosition();
-        // Checks if the movemement is not directly along a cardinal axis
-        if (movement.x != 0.f || movement.y != 0.f)
-        {
-            // Finds the length of the vector
-            float length = std::sqrt(movement.x * movement.x + movement.y * movement.y);
-            // Divide by length to normalise the length of the vector to 1
-            movement /= length;
-            // Multiply by speed
-            // Non linear speed would be a cool feature like it accelerates and deccelerates
-            movement *= speed;
-        }
+        // Finds the length of the vector
+        float length = std::sqrt(movement.x * movement.x + movement.y * movement.y);
+        // Divide by length to normalise the length of the vector to 1
+        movement /= length;
+        // Multiply by speed
+        movement *= speed;
         // Moves the entity only if it is further away from its destination then half the speed. This value can be tweaked
         if (std::sqrt((body->getPosition().x - finish.x) * (body->getPosition().x - finish.x) + (body->getPosition().y - finish.y) * (body->getPosition().y - finish.y)) > speed / 2)
         {
