@@ -16,10 +16,7 @@ public:
     Enemy() : Enemy(0, 0, 0, 0, 0, nullptr, 0) {}
     void setPosition(Player *player)
     {
-        if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
-        {
-            destination = player->getPosition();
-        }
+        destination = player->getPosition();
     }
 };
 #endif
