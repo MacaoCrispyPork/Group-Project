@@ -16,7 +16,7 @@ public:
 
     std::optional<Projectile> attack(sf::Vector2f position, sf::Vector2f destination, bool isPlayer) override
     {
-        if (((float)(clock() - lastAttack) / CLOCKS_PER_SEC) < fireRate)
+        if (((float)(clock() - lastAttack) / CLOCKS_PER_SEC) > fireRate)
         {
             this->lastAttack = clock();
             return Projectile(projSize, position.x, position.y, sf::Color::Red, damage, projSpeed, position.x, position.y, isPlayer);
