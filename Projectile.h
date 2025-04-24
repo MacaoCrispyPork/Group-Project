@@ -8,7 +8,7 @@
 
 class Projectile : public Entity
 {
-protected:
+private:
     int damage;
 
 public:
