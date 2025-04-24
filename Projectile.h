@@ -1,9 +1,10 @@
 #ifndef PROJECTILE_H
 #define PROJECTILE_H
 
-#include "Entity.h"
 #include <SFML/Graphics.hpp>
 #include <cmath>
+
+#include "Entity.h"
 
 class Projectile : public Entity
 {
@@ -19,6 +20,6 @@ public:
 
     std::string getType();
 
-    int Projectile::getDamage();
+    int getDamage();
 };
 #endif

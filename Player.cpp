@@ -1,5 +1,6 @@
-#include "Player.h"
 #include <SFML/Graphics.hpp>
+
+#include "Player.h"
 #include "Weapon.h"
 #include "Character.h"
 #include "Entity.h"

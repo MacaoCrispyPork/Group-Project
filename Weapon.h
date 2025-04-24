@@ -3,9 +3,10 @@
 
 #include <SFML/Graphics.hpp>
 #include <cmath>
-#include "Projectile.h"
 #include <ctime>
 #include <optional>
+
+#include "Projectile.h"
 
 class Weapon
 {

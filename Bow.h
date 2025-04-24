@@ -3,10 +3,11 @@
 
 #include <SFML/Graphics.hpp>
 #include <cmath>
-#include "Projectile.h"
-#include "Weapon.h"
 #include <optional>
 #include <ctime>
+
+#include "Projectile.h"
+#include "Weapon.h"
 
 class Bow : public Weapon
 {

@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
-#include "Entity.h"
 #include <cmath>
+
+#include "Entity.h"
 
 // To-Do: remove x, y, destinationX, destinationY and just take position and destination vectors directly
 Entity::Entity() : Entity(0, 0, 0, sf::Color::Cyan, 0, 0, 0, NULL) {}

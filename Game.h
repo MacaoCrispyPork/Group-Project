@@ -7,6 +7,7 @@
 #include "Projectile.h"
 #include "Bow.h"
 #include "Zombie.h"
+#include "Skeleton.h"
 
 class Game
 {

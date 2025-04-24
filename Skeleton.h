@@ -2,6 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <cmath>
+
 #include "Weapon.h"
 #include "Character.h"
 #include "Player.h"
