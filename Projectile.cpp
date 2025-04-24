@@ -4,12 +4,11 @@
 #include <cmath>
 
 // todo: color based on isPlayer
-Projectile::Projectile() : Projectile(0, 0, 0, sf::Color::Red, 0, 0, 0, NULL, 0) {}
+Projectile::Projectile() : Projectile(0, sf::Vector2(0.f, 0.f), sf::Color::Red, 0, sf::Vector2(0.f, 0.f), NULL, 0) {}
 
-Projectile::Projectile(int r, int x, int y, sf::Color color, int speed,
-                       float destinationX, float destinationY, bool isPlayer,
-                       int damage)
-    : Entity(r, x, y, color, speed, destinationX, destinationY, isPlayer),
+Projectile::Projectile(int r, sf::Vector2f position, sf::Color color, int speed,
+                       sf::Vector2f destination, bool isPlayer, int damage)
+    : Entity(r, position, color, speed, destination, isPlayer),
       damage(damage) {}
 
 std::string Projectile::getType()

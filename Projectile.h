@@ -14,9 +14,8 @@ protected:
 public:
     Projectile();
 
-    Projectile(int r, int x, int y, sf::Color color, int speed,
-               float destinationX, float destinationY, bool isPlayer,
-               int damage);
+    Projectile(int r, sf::Vector2f position, sf::Color color, int speed,
+               sf::Vector2f destination, bool isPlayer, int damage);
 
     std::string getType();
 

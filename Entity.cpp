@@ -1,22 +1,19 @@
 #include <SFML/Graphics.hpp>
 #include <cmath>
-
 #include "Entity.h"
 
-// To-Do: remove x, y, destinationX, destinationY and just take position and destination vectors directly
-Entity::Entity() : Entity(0, 0, 0, sf::Color::Cyan, 0, 0, 0, NULL) {}
+Entity::Entity() : Entity(0, sf::Vector2(0.f, 0.f), sf::Color::Cyan, 0, sf::Vector2(0.f, 0.f), NULL) {}
 
-Entity::Entity(int r, int x, int y, sf::Color color, int speed,
-               float destinationX, float destinationY, bool isPlayer)
+Entity::Entity(int r, sf::Vector2f position, sf::Color color, int speed,
+    sf::Vector2f destination, bool isPlayer)
     : speed(speed), isPlayer(isPlayer)
 {
     body = new sf::CircleShape();
     body->setRadius(r);
-    body->setPosition(x, y);
+    body->setPosition(position);
     body->setFillColor(color);
     // Might not be needed
     body->setOrigin(r / 2, r / 2);
-    destination = sf::Vector2f(destinationX, destinationY);
 }
 
 std::string Entity::getType()

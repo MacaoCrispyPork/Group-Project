@@ -5,10 +5,10 @@
 #include "Character.h"
 #include "Entity.h"
 
-Player::Player() : Player(0, 0, 0, 0, 0, nullptr) {}
+Player::Player() : Player(0, sf::Vector2(0.f, 0.f), 0, 0, nullptr) {}
 
-Player::Player(int r, int x, int y, int speed, int health, Weapon *weapon)
-    : Character(r, x, y, sf::Color::Cyan, speed,x, y, 1, health, weapon),
+Player::Player(int r, sf::Vector2f position, int speed, int health, Weapon *weapon)
+    : Character(r, position, sf::Color::Cyan, speed, 1, health, weapon),
       level(0) {}
 
 void Player::setPosition(sf::RenderWindow *win)

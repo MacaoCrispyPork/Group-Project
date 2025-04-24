@@ -14,7 +14,7 @@ private:
 
 public:
     Player();
-    Player(int r, int x, int y, int speed, int health, Weapon *weapon);
+    Player(int r, sf::Vector2f position, int speed, int health, Weapon *weapon);
     void setPosition(sf::RenderWindow *win);
     std::string getType() override;
 };

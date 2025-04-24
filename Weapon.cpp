@@ -22,6 +22,7 @@ clock_t Weapon::getLastAttack()
 {
     return lastAttack;
 }
+
 int Weapon::getFireRate()
 {
     return fireRate;

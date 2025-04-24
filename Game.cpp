@@ -7,12 +7,12 @@ Game::Game(int sizeX, int sizeY, std::string title)
     all_characters = new Character *[10];
     all_projectile = new Projectile *[10];
     Weapon *weapon = new Bow(10, 1, 2, 1, 300);
-    player = new Player(10, 50, 50, 3, 1, weapon);
+    player = new Player(10, sf::Vector2f(50, 50), 3, 1, weapon);
     all_characters[0] = player;
     // Creating Zombies with randomised position
     for (int i = 1; i < 10; i++)
     {
-        all_characters[i] = new Zombie(5, rand() % sizeX + 10, rand() % sizeY + 10, 1, 10, weapon, .1);
+        all_characters[i] = new Zombie(5, sf::Vector2f(rand() % sizeX + 10, rand() % sizeY + 10), 1, 10, weapon, .1);
     }
     // Filling the projectile array with generic projectiles
     for (int i = 0; i < 10; i++)
