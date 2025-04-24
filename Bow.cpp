@@ -1,7 +1,10 @@
 #include "Bow.h"
 
-Bow::Bow(int damage, int fireRate, int projSize, int projSpeed, int range) : Weapon(damage, fireRate, projSize, projSpeed), range(range) {}
 Bow::Bow() : Bow(0, 0, 0, 0, 0) {}
+
+Bow::Bow(int damage, int fireRate, int projSize, int projSpeed, int range)
+    : Weapon(damage, fireRate, projSize, projSpeed),
+      range(range) {}
 
 sf::Vector2f Bow::calculateRange(sf::Vector2f position, sf::Vector2f destination, int range)
 {

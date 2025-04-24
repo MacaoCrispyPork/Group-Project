@@ -3,10 +3,14 @@
 #include <SFML/Graphics.hpp>
 #include <cmath>
 
-//todo: color based on isPlayer
-Projectile::Projectile(int r, int x, int y, sf::Color color, int speed, float destinationX, float destinationY, bool isPlayer, int damage) : Entity(r, x, y, color, speed, destinationX, destinationY, isPlayer), damage(damage) {}
-
+// todo: color based on isPlayer
 Projectile::Projectile() : Projectile(0, 0, 0, sf::Color::Red, 0, 0, 0, NULL, 0) {}
+
+Projectile::Projectile(int r, int x, int y, sf::Color color, int speed,
+                       float destinationX, float destinationY, bool isPlayer,
+                       int damage)
+    : Entity(r, x, y, color, speed, destinationX, destinationY, isPlayer),
+      damage(damage) {}
 
 std::string Projectile::getType()
 {

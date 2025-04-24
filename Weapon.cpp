@@ -1,12 +1,13 @@
 #include "Weapon.h"
 
 Weapon::Weapon() : Weapon(0, 0, 0, 0) {}
+
 Weapon::Weapon(int damage, int fireRate, int projSize, int projSpeed)
+    : damage(damage),
+      fireRate(fireRate), 
+      projSize(projSize), 
+      projSpeed(projSpeed) 
 {
-    this->damage = damage;
-    this->fireRate = fireRate;
-    this->projSize = projSize;
-    this->projSize = projSpeed;
     this->lastAttack = clock();
 }
 

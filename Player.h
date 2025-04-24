@@ -12,8 +12,8 @@ private:
     int level;
 
 public:
-    Player(int r, int x, int y, int speed, int health, Weapon *weapon);
     Player();
+    Player(int r, int x, int y, int speed, int health, Weapon *weapon);
     void Player::setPosition(sf::RenderWindow *win);
     std::string getType() override;
 };

@@ -11,8 +11,8 @@ protected:
     int xp;
 
 public:
+Enemy();
     Enemy(int r, int x, int y, int speed, int health, Weapon *weapon, int xp);
-    Enemy();
     void setPosition(Player *player);
     std::string getType();
 };

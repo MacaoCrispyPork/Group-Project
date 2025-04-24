@@ -11,9 +11,11 @@ protected:
     Weapon *weapon;
 
 public:
-    Character(int r, int x, int y, sf::Color color, int speed, float destinationX, float destinationY, bool isPlayer, int health, Weapon *weapon);
-
     Character();
+
+    Character(int r, int x, int y, sf::Color color, int speed,
+              float destinationX, float destinationY, bool isPlayer,
+              int health, Weapon *weapon);
 
     Weapon *getWeapon();
 

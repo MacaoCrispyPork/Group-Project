@@ -11,9 +11,11 @@ protected:
     int damage;
 
 public:
-    Projectile(int r, int x, int y, sf::Color color, int speed, float destinationX, float destinationY, bool isPlayer, int damage);
-
     Projectile();
+
+    Projectile(int r, int x, int y, sf::Color color, int speed,
+               float destinationX, float destinationY, bool isPlayer,
+               int damage);
 
     std::string getType();
 

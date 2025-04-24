@@ -3,7 +3,11 @@
 #include <cmath>
 
 // To-Do: remove x, y, destinationX, destinationY and just take position and destination vectors directly
-Entity::Entity(int r, int x, int y, sf::Color color, int speed, float destinationX, float destinationY, bool isPlayer) : speed(speed), isPlayer(isPlayer)
+Entity::Entity() : Entity(0, 0, 0, sf::Color::Cyan, 0, 0, 0, NULL) {}
+
+Entity::Entity(int r, int x, int y, sf::Color color, int speed,
+               float destinationX, float destinationY, bool isPlayer)
+    : speed(speed), isPlayer(isPlayer)
 {
     body = new sf::CircleShape();
     body->setRadius(r);
@@ -13,8 +17,6 @@ Entity::Entity(int r, int x, int y, sf::Color color, int speed, float destinatio
     body->setOrigin(r / 2, r / 2);
     destination = sf::Vector2f(destinationX, destinationY);
 }
-
-Entity::Entity() : Entity(0, 0, 0, sf::Color::Cyan, 0, 0, 0, NULL) {}
 
 std::string Entity::getType()
 {

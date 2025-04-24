@@ -14,8 +14,8 @@ private:
     int range;
 
 public:
-    Bow(int damage, int fireRate, int projSize, int projSpeed, int range);
     Bow();
+    Bow(int damage, int fireRate, int projSize, int projSpeed, int range);
     sf::Vector2f calculateRange(sf::Vector2f position, sf::Vector2f destination, int range);
     std::optional<Projectile> attack(sf::Vector2f position, sf::Vector2f destination, bool isPlayer) override;
 };

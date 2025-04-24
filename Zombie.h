@@ -7,8 +7,8 @@
 class Zombie : public Enemy
 {
 public:
-    Zombie(int r, int x, int y, int speed, int health, Weapon *weapon, int xp);
     Zombie();
+    Zombie(int r, int x, int y, int speed, int health, Weapon *weapon, int xp);
     std::string getType() override;
 };
 #endif

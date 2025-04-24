@@ -14,9 +14,9 @@ protected:
     bool isPlayer;
 
 public:
-    Entity(int r, int x, int y, sf::Color color, int speed, float destinationX, float destinationY, bool isPlayer);
-
     Entity();
+    Entity(int r, int x, int y, sf::Color color, int speed,
+           float destinationX, float destinationY, bool isPlayer);
 
     virtual std::string getType();
 
