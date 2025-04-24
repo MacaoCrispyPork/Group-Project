@@ -14,7 +14,6 @@ class Game
 private:
     sf::RenderWindow *win;
     Player *player;
-    Weapon *weapon;
     Character **all_characters;
     Projectile **all_projectile;
     int projectileCount;

@@ -6,7 +6,7 @@ Game::Game(int sizeX, int sizeY, std::string title)
     // Size of these arrays is just a random number probably best to replace with a variable
     all_characters = new Character *[10];
     all_projectile = new Projectile *[10];
-    weapon = new Bow(10, 1, 2, 1, 300);
+    Weapon *weapon = new Bow(10, 1, 2, 1, 300);
     player = new Player(10, 50, 50, 3, 1, weapon);
     all_characters[0] = player;
     // Creating Zombies with randomised position

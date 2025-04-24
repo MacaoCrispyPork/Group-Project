@@ -26,6 +26,5 @@ public:
 
     clock_t getLastAttack();
     int getFireRate();
-    //~Weapon();
 };
 #endif
