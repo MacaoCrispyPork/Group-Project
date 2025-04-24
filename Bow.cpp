@@ -23,7 +23,8 @@ std::optional<Projectile> Bow::attack(sf::Vector2f position, sf::Vector2f destin
     {
         this->lastAttack = clock();
         sf::Vector2f endpoint = calculateRange(position, destination, range);
-        return Projectile(projSize, position, sf::Color::Red, damage, endpoint, projSpeed, isPlayer);
+        // compared to Bow the endpoint = destination
+        return Projectile(projSize, position, sf::Color::Red, projSpeed, endpoint, isPlayer, damage);
     }
     return std::nullopt;
 }

@@ -13,7 +13,7 @@ Player::Player(int r, sf::Vector2f position, int speed, int health, Weapon *weap
 
 void Player::setPosition(sf::RenderWindow *win)
 {
-    if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Right))
     {
         destination = sf::Vector2f(sf::Mouse::getPosition(*win).x, sf::Mouse::getPosition(*win).y);
     }

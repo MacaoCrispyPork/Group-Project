@@ -13,6 +13,6 @@ class Skeleton : public Enemy
 {
 public:
     Skeleton();
-    Skeleton(int r, int x, int y, int speed, int health, Weapon *weapon, int xp);
+    Skeleton(int r, sf::Vector2f position, int speed, int health, Weapon *weapon, int xp);
     std::string getType() override;
 };
