@@ -1,4 +1,8 @@
 #include "Player.h"
+#include <SFML/Graphics.hpp>
+#include "Weapon.h"
+#include "Character.h"
+#include "Entity.h"
 
 Player::Player(int r, int x, int y, int speed, int health, Weapon *weapon) : Character(r, x, y, sf::Color::Cyan, speed, x, y, 1, health, weapon), level(0) {}
 Player::Player() : Player(0, 0, 0, 0, 0, nullptr) {}

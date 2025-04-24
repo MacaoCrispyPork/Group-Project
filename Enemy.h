@@ -1,8 +1,10 @@
 #ifndef ENEMY_H
 #define ENEMY_H
+
 #include "Weapon.h"
 #include "Character.h"
 #include "Player.h"
+
 class Enemy : public Character
 {
 protected:

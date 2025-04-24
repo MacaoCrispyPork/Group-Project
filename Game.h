@@ -1,14 +1,11 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include <cstdlib>
 #include <string>
 #include "Player.h"
 #include "Character.h"
-#include "Entity.h"
 #include "Weapon.h"
-#include "Bow.h"
 #include "Projectile.h"
-#include "Sword.h"
+#include "Bow.h"
 #include "Zombie.h"
 
 class Game

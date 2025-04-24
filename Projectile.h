@@ -2,6 +2,8 @@
 #define PROJECTILE_H
 
 #include "Entity.h"
+#include <SFML/Graphics.hpp>
+#include <cmath>
 
 class Projectile : public Entity
 {

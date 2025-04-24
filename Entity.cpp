@@ -1,4 +1,6 @@
+#include <SFML/Graphics.hpp>
 #include "Entity.h"
+#include <cmath>
 
 // To-Do: remove x, y, destinationX, destinationY and just take position and destination vectors directly
 Entity::Entity(int r, int x, int y, sf::Color color, int speed, float destinationX, float destinationY, bool isPlayer) : speed(speed), isPlayer(isPlayer)

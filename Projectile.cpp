@@ -1,4 +1,5 @@
 #include "Projectile.h"
+#include "Entity.h"
 #include <SFML/Graphics.hpp>
 #include <cmath>
 
