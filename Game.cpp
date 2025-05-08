@@ -12,7 +12,7 @@ Game::Game(int sizeX, int sizeY, std::string title)
     // Creating Zombies with randomised position
     for (int i = 1; i < 10; i++)
     {
-        all_characters[i] = new Zombie(5, sf::Vector2f(rand() % sizeX + 10, rand() % sizeY + 10), 1, 10, weapon, .1);
+        // all_characters[i] = new Zombie(5, sf::Vector2f(rand() % sizeX + 10, rand() % sizeY + 10), 1, 10, weapon, .1);
     }
     // Filling the projectile array with generic projectiles
     for (int i = 0; i < 10; i++)
@@ -69,14 +69,15 @@ void Game::run()
             player->setPosition(win);
             for (int i = 0; i < 10; i++)
             {
-
-                if (all_characters[i]->getType() == "Player")
-                {
-                    all_characters[i]->move(player->getDestination());
-                }
-                else if (all_characters[i]->getType() == "Zombie")
-                {
-                    all_characters[i]->move(player->getPosition());
+                if (all_characters[i] != nullptr) {
+                    if (all_characters[i]->getType() == "Player")
+                    {
+                        all_characters[i]->move(player->getDestination());
+                    }
+                    else if (all_characters[i]->getType() == "Zombie")
+                    {
+                        all_characters[i]->move(player->getPosition());
+                    }
                 }
             }
             // Basic movement code
@@ -102,11 +103,13 @@ void Game::run()
             {
                 for (int j = 0; j < 10; j++)
                 {
-                    if (all_characters[i]->checkCollision(all_projectile[j]))
-                    {
-                        std::cout << clock() / CLOCKS_PER_SEC << " : " << all_characters[i]->getType() << " " << i << " collided with " << all_projectile[j]->getType() << " " << j << std::endl;
-                        all_characters[i]->takeDamage(all_projectile[j]->getDamage());
-                    };
+                    if (all_characters[i] != nullptr) {
+                        if (all_characters[i]->checkCollision(all_projectile[j]))
+                        {
+                            std::cout << clock() / CLOCKS_PER_SEC << " : " << all_characters[i]->getType() << " " << i << " collided with " << all_projectile[j]->getType() << " " << j << std::endl;
+                            all_characters[i]->takeDamage(all_projectile[j]->getDamage());
+                        };
+                    }
                 }
             }
             // Here is where we will delete projectile after it hits something
@@ -128,7 +131,7 @@ void Game::run()
 
             for (int i = 0; i < 10; i++)
             {
-                all_characters[i]->draw(win);
+                if (all_characters[i] != nullptr) all_characters[i]->draw(win);
             }
 
             for (int i = 0; i < 10; i++)
