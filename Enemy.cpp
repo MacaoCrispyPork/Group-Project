@@ -13,7 +13,3 @@ void Enemy::setPosition(Player *player)
 {
     destination = player->getPosition();
 }
-std::string Enemy::getType()
-{
-    return "Enemy";
-}

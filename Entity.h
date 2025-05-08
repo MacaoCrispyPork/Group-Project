@@ -19,7 +19,7 @@ public:
         sf::Vector2f destination, bool isPlayer);
     Entity(const Entity &entity);
 
-    virtual std::string getType();
+    virtual std::string getType() = 0;
 
     void move(sf::Vector2f finish);
 

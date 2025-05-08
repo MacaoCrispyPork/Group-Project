@@ -21,11 +21,6 @@ Entity::Entity(const Entity &entity) : speed(entity.speed), destination(entity.d
     body = new sf::CircleShape(*entity.body);
 }
 
-std::string Entity::getType()
-{
-    return "Entity";
-}
-
 void Entity::move(sf::Vector2f finish)
 {
     // Creates a vector movement in the direction of destination

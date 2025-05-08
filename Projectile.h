@@ -17,7 +17,7 @@ public:
     Projectile(int r, sf::Vector2f position, sf::Color Colour, int speed,
                sf::Vector2f destination, bool isPlayer, int damage);
 
-    std::string getType();
+    std::string getType() override;
 
     int getDamage();
 };
