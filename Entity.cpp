@@ -2,7 +2,7 @@
 #include <cmath>
 #include "Entity.h"
 
-Entity::Entity() : Entity(0, sf::Vector2(0.f, 0.f), sf::Color::Cyan, 0, sf::Vector2(0.f, 0.f), NULL) {}
+Entity::Entity() : Entity(0, sf::Vector2(0.f, 0.f), sf::Color::Cyan, 0, sf::Vector2(0.f, 0.f), false) {}
 
 Entity::Entity(int r, sf::Vector2f position, sf::Color color, int speed,
     sf::Vector2f destination, bool isPlayer)
