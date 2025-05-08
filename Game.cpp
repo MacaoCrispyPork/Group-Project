@@ -17,9 +17,9 @@ Game::Game(int sizeX, int sizeY, std::string title)
     // Filling the projectile array with generic projectiles
     for (int i = 0; i < 10; i++)
     {
-        all_projectile[i] = new Projectile();
+        //all_projectile[i] = new Projectile();
     }
-    projectileCount = 10;
+    projectileCount = 0;
 }
 
 void Game::run()
@@ -83,7 +83,7 @@ void Game::run()
             // To-do: recode movement function to use destination
             for (int i = 0; i < 10; i++)
             {
-                all_projectile[i]->move(all_projectile[i]->getDestination());
+                if (all_projectile[i] != nullptr) all_projectile[i]->move(all_projectile[i]->getDestination());
             }
             // Deleting projectile once it reaches within speed distance of its destination
             // Todo: move this to the move function for projectiles

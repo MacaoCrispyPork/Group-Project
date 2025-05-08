@@ -16,6 +16,11 @@ Entity::Entity(int r, sf::Vector2f position, sf::Color color, int speed,
     body->setOrigin(r / 2, r / 2);
 }
 
+Entity::Entity(const Entity &entity) : speed(entity.speed), isPlayer(entity.isPlayer)
+{
+    body = new sf::CircleShape(*entity.body);
+}
+
 std::string Entity::getType()
 {
     return "Entity";

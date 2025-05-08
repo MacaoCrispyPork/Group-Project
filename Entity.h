@@ -17,6 +17,7 @@ public:
     Entity();
     Entity(int r, sf::Vector2f position, sf::Color color, int speed,
         sf::Vector2f destination, bool isPlayer);
+    Entity(const Entity &entity);
 
     virtual std::string getType();
 
