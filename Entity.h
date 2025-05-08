@@ -12,6 +12,7 @@ protected:
     sf::Vector2f destination;
     // Not implemented in collision check yet
     bool isPlayer;
+    bool isDestroyed;
 
 public:
     Entity();
@@ -32,6 +33,8 @@ public:
     sf::Vector2f getDestination();
 
     float getSpeed();
+
+    bool getIsDestroyed();
 
     ~Entity();
 };

@@ -6,7 +6,7 @@ Entity::Entity() : Entity(0, sf::Vector2(0.f, 0.f), sf::Color::Cyan, 0, sf::Vect
 
 Entity::Entity(int r, sf::Vector2f position, sf::Color color, int speed,
     sf::Vector2f destination, bool isPlayer)
-    : speed(speed), destination(destination), isPlayer(isPlayer)
+    : speed(speed), destination(destination), isPlayer(isPlayer), isDestroyed(false)
 {
     body = new sf::CircleShape();
     body->setRadius(r);
@@ -67,5 +67,7 @@ float Entity::getSpeed()
 {
     return speed;
 }
+
+bool Entity::getIsDestroyed() { return isDestroyed; }
 
 Entity::~Entity() { delete body; }

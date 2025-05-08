@@ -86,29 +86,21 @@ void Game::run()
             {
                 if (all_projectiles[i] != nullptr) all_projectiles[i]->move(all_projectiles[i]->getDestination());
             }
-            // Deleting projectile once it reaches within speed distance of its destination
-            // Todo: move this to the move function for projectiles
-            for (int i = 0; i < 10; i++)
-            {
-                if (all_projectiles[i] != nullptr) {
-                    if (std::sqrt((all_projectiles[i]->getPosition().x - all_projectiles[i]->getDestination().x) * (all_projectiles[i]->getPosition().x - all_projectiles[i]->getDestination().x) + (all_projectiles[i]->getPosition().y - all_projectiles[i]->getDestination().y) * (all_projectiles[i]->getPosition().y - all_projectiles[i]->getDestination().y)) < all_projectiles[i]->getSpeed())
-                    {
-                        delete all_projectiles[i];
-                        all_projectiles[i] = new Projectile();
-                    }
-                }
-            }
             // Damage actually means nothing right now but I think this code works
             for (int i = 0; i < 10; i++)
             {
-                for (int j = 0; j < 10; j++)
-                {
-                    if (all_characters[i] != nullptr) {
+                if (all_characters[i] != nullptr) {
+                    for (int j = 0; j < 10; j++)
+                    {
                         if (all_characters[i]->checkCollision(all_projectiles[j]))
                         {
                             std::cout << clock() / CLOCKS_PER_SEC << " : " << all_characters[i]->getType() << " " << i << " collided with " << all_projectiles[j]->getType() << " " << j << std::endl;
                             all_characters[i]->takeDamage(all_projectiles[j]->getDamage());
                         };
+                    }
+                    if (all_characters[i]->getIsDestroyed()) {
+                        delete all_characters[i];
+                        all_characters[i] = nullptr;
                     }
                 }
             }
@@ -122,6 +114,10 @@ void Game::run()
                         {
                             std::cout << float(clock() / CLOCKS_PER_SEC) << " : " << all_projectiles[i]->getType() << " " << i << " collided with " << all_characters[j]->getType() << " " << j << std::endl;
                         };
+                    }
+                    if (all_projectiles[i]->getIsDestroyed()) {
+                        delete all_projectiles[i];
+                        all_projectiles[i] = nullptr;
                     }
                 }
             }
