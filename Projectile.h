@@ -21,6 +21,6 @@ public:
 
     int getDamage();
 
-    void move(sf::Vector2f finish) override;
+    void move() override;
 };
 #endif

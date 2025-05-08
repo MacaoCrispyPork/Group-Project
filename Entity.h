@@ -22,7 +22,7 @@ public:
 
     virtual std::string getType() = 0;
 
-    virtual void move(sf::Vector2f finish);
+    virtual void move();
 
     bool checkCollision(Entity *entity);
 

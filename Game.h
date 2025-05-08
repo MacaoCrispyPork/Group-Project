@@ -21,5 +21,13 @@ private:
 public:
     Game(int sizeX, int sizeY, std::string title);
     void run();
+    bool handleEvents();
+    void handlePlayerAttack();
+    void updateGameState();
+    void moveCharacters();
+    void moveProjectiles();
+    void handleCharacterCollisions();
+    void handleProjectileCollisions();
+    void render();
     ~Game();
 };

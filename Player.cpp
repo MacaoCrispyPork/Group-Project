@@ -15,7 +15,7 @@ void Player::setPosition(sf::RenderWindow *win)
 {
     if (sf::Mouse::isButtonPressed(sf::Mouse::Right))
     {
-        destination = sf::Vector2f(sf::Mouse::getPosition(*win).x, sf::Mouse::getPosition(*win).y);
+        destination = sf::Vector2f(sf::Mouse::getPosition(*win));
     }
 }
 

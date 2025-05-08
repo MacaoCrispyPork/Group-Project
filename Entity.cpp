@@ -21,10 +21,10 @@ Entity::Entity(const Entity &entity) : speed(entity.speed), destination(entity.d
     body = new sf::CircleShape(*entity.body);
 }
 
-void Entity::move(sf::Vector2f finish)
+void Entity::move()
 {
     // Creates a vector movement in the direction of destination
-    sf::Vector2f movement = finish - body->getPosition();
+    sf::Vector2f movement = destination - body->getPosition();
     // Finds the length of the vector
     float length = std::sqrt(movement.x * movement.x + movement.y * movement.y);
     // Divide by length to normalise the length of the vector to 1
@@ -32,7 +32,8 @@ void Entity::move(sf::Vector2f finish)
     // Multiply by speed
     movement *= speed;
     // Moves the entity only if it is further away from its destination then half the speed. This value can be tweaked
-    if (std::sqrt((body->getPosition().x - finish.x) * (body->getPosition().x - finish.x) + (body->getPosition().y - finish.y) * (body->getPosition().y - finish.y)) > speed / 2)
+    sf::Vector2f distance = getPosition() - destination;
+    if (length > speed/2)
     {
         body->move(movement);
     }
