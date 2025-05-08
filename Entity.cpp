@@ -45,8 +45,12 @@ void Entity::move(sf::Vector2f finish)
 
 bool Entity::checkCollision(Entity *entity)
 {
-    float distance = std::sqrt((body->getPosition().x - entity->body->getPosition().x) * (body->getPosition().x - entity->body->getPosition().x) + (body->getPosition().y - entity->body->getPosition().y) * (body->getPosition().y - entity->body->getPosition().y));
-    return (distance < body->getRadius() + entity->body->getRadius());
+    if (entity != nullptr) {
+        float distance = std::sqrt((body->getPosition().x - entity->body->getPosition().x) * (body->getPosition().x - entity->body->getPosition().x) + (body->getPosition().y - entity->body->getPosition().y) * (body->getPosition().y - entity->body->getPosition().y));
+        return (distance < body->getRadius() + entity->body->getRadius());
+    } else {
+        return false;
+    }
 }
 
 void Entity::draw(sf::RenderWindow *win)
