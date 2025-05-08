@@ -20,5 +20,7 @@ public:
     std::string getType() override;
 
     int getDamage();
+
+    void move(sf::Vector2f finish) override;
 };
 #endif

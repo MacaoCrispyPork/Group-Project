@@ -5,7 +5,7 @@ Game::Game(int sizeX, int sizeY, std::string title)
     win = new sf::RenderWindow(sf::VideoMode(sizeX, sizeY), title);
     // Size of these arrays is just a random number probably best to replace with a variable
     all_characters = new Character *[10]{nullptr};
-    all_projectile = new Projectile *[10]{nullptr};
+    all_projectiles = new Projectile *[10]{nullptr};
     Weapon *weapon = new Bow(10, 1, 2, 1, 300);
     player = new Player(10, sf::Vector2f(50, 50), 3, 1, weapon);
     all_characters[0] = player;
@@ -17,7 +17,7 @@ Game::Game(int sizeX, int sizeY, std::string title)
     // Filling the projectile array with generic projectiles
     for (int i = 0; i < 10; i++)
     {
-        //all_projectile[i] = new Projectile();
+        //all_projectiles[i] = new Projectile();
     }
     projectileCount = 0;
 }
@@ -55,8 +55,8 @@ void Game::run()
                     if (attack)
                     {
                         if (projectileCount >= 10) projectileCount = 0;
-                        if (all_projectile[projectileCount]) delete all_projectile[projectileCount];
-                        all_projectile[projectileCount] = new Projectile(attack.value());
+                        if (all_projectiles[projectileCount]) delete all_projectiles[projectileCount];
+                        all_projectiles[projectileCount] = new Projectile(attack.value());
                         projectileCount++;
                     }
                 }
@@ -84,17 +84,17 @@ void Game::run()
             // To-do: recode movement function to use destination
             for (int i = 0; i < 10; i++)
             {
-                if (all_projectile[i] != nullptr) all_projectile[i]->move(all_projectile[i]->getDestination());
+                if (all_projectiles[i] != nullptr) all_projectiles[i]->move(all_projectiles[i]->getDestination());
             }
             // Deleting projectile once it reaches within speed distance of its destination
             // Todo: move this to the move function for projectiles
             for (int i = 0; i < 10; i++)
             {
-                if (all_projectile[i] != nullptr) {
-                    if (std::sqrt((all_projectile[i]->getPosition().x - all_projectile[i]->getDestination().x) * (all_projectile[i]->getPosition().x - all_projectile[i]->getDestination().x) + (all_projectile[i]->getPosition().y - all_projectile[i]->getDestination().y) * (all_projectile[i]->getPosition().y - all_projectile[i]->getDestination().y)) < all_projectile[i]->getSpeed())
+                if (all_projectiles[i] != nullptr) {
+                    if (std::sqrt((all_projectiles[i]->getPosition().x - all_projectiles[i]->getDestination().x) * (all_projectiles[i]->getPosition().x - all_projectiles[i]->getDestination().x) + (all_projectiles[i]->getPosition().y - all_projectiles[i]->getDestination().y) * (all_projectiles[i]->getPosition().y - all_projectiles[i]->getDestination().y)) < all_projectiles[i]->getSpeed())
                     {
-                        delete all_projectile[i];
-                        all_projectile[i] = new Projectile();
+                        delete all_projectiles[i];
+                        all_projectiles[i] = new Projectile();
                     }
                 }
             }
@@ -104,10 +104,10 @@ void Game::run()
                 for (int j = 0; j < 10; j++)
                 {
                     if (all_characters[i] != nullptr) {
-                        if (all_characters[i]->checkCollision(all_projectile[j]))
+                        if (all_characters[i]->checkCollision(all_projectiles[j]))
                         {
-                            std::cout << clock() / CLOCKS_PER_SEC << " : " << all_characters[i]->getType() << " " << i << " collided with " << all_projectile[j]->getType() << " " << j << std::endl;
-                            all_characters[i]->takeDamage(all_projectile[j]->getDamage());
+                            std::cout << clock() / CLOCKS_PER_SEC << " : " << all_characters[i]->getType() << " " << i << " collided with " << all_projectiles[j]->getType() << " " << j << std::endl;
+                            all_characters[i]->takeDamage(all_projectiles[j]->getDamage());
                         };
                     }
                 }
@@ -115,12 +115,12 @@ void Game::run()
             // Here is where we will delete projectile after it hits something
             for (int i = 0; i < 10; i++)
             {
-                if (all_projectile[i] != nullptr) {
+                if (all_projectiles[i] != nullptr) {
                     for (int j = 0; j < 10; j++)
                     {
-                        if (all_projectile[i]->checkCollision(all_characters[j]))
+                        if (all_projectiles[i]->checkCollision(all_characters[j]))
                         {
-                            std::cout << float(clock() / CLOCKS_PER_SEC) << " : " << all_projectile[i]->getType() << " " << i << " collided with " << all_characters[j]->getType() << " " << j << std::endl;
+                            std::cout << float(clock() / CLOCKS_PER_SEC) << " : " << all_projectiles[i]->getType() << " " << i << " collided with " << all_characters[j]->getType() << " " << j << std::endl;
                         };
                     }
                 }
@@ -136,7 +136,7 @@ void Game::run()
 
             for (int i = 0; i < 10; i++)
             {
-                if (all_projectile[i] != nullptr) all_projectile[i]->draw(win);
+                if (all_projectiles[i] != nullptr) all_projectiles[i]->draw(win);
             }
             win->display();
         }
@@ -147,9 +147,9 @@ Game::~Game()
 {
     for (int i = 0; i < 10; i++)
     {
-        delete all_projectile[i];
+        delete all_projectiles[i];
     }
-    delete[] all_projectile;
+    delete[] all_projectiles;
 
     for (int i = 0; i < 10; i++)
     {

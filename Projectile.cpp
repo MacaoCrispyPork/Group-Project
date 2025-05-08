@@ -21,3 +21,12 @@ int Projectile::getDamage()
 {
     return damage;
 }
+
+void Projectile::move(sf::Vector2f finish){
+    Entity::move(finish);
+    sf::Vector2f distance = getPosition() - destination;
+    if (std::sqrt(distance.x*distance.x + distance.y*distance.y) < speed/2)
+    {
+        delete this;
+    }
+}

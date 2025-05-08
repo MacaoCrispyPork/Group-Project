@@ -15,7 +15,7 @@ private:
     sf::RenderWindow *win;
     Player *player;
     Character **all_characters;
-    Projectile **all_projectile;
+    Projectile **all_projectiles;
     int projectileCount;
 
 public:
