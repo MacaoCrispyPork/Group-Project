@@ -4,8 +4,8 @@ Game::Game(int sizeX, int sizeY, std::string title)
 {
     win = new sf::RenderWindow(sf::VideoMode(sizeX, sizeY), title);
     // Size of these arrays is just a random number probably best to replace with a variable
-    all_characters = new Character *[10];
-    all_projectile = new Projectile *[10];
+    all_characters = new Character *[10]{nullptr};
+    all_projectile = new Projectile *[10]{nullptr};
     Weapon *weapon = new Bow(10, 1, 2, 1, 300);
     player = new Player(10, sf::Vector2f(50, 50), 3, 1, weapon);
     all_characters[0] = player;
@@ -54,11 +54,8 @@ void Game::run()
                     std::optional<Projectile> attack = player->attack(sf::Vector2f(sf::Mouse::getPosition(*win)));
                     if (attack)
                     {
-                        if (projectileCount >= 10)
-                        {
-                            projectileCount = 0;
-                        }
-
+                        if (projectileCount >= 10) projectileCount = 0;
+                        if (all_projectile[projectileCount]) delete all_projectile[projectileCount];
                         all_projectile[projectileCount] = new Projectile(attack.value());
                         projectileCount++;
                     }
