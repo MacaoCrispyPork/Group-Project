@@ -19,7 +19,7 @@ Game::Game(int sizeX, int sizeY, std::string title)
     {
         all_projectile[i] = new Projectile();
     }
-    projectileCount = 0;
+    projectileCount = 10;
 }
 
 void Game::run()
@@ -51,7 +51,7 @@ void Game::run()
             {
                 if (event.key.code == sf::Keyboard::Space)
                 {
-                    std::optional<Projectile> attack = player->getWeapon()->attack(player->getPosition(), sf::Vector2f(sf::Mouse::getPosition(*win)), 1);
+                    std::optional<Projectile> attack = player->attack(sf::Vector2f(sf::Mouse::getPosition(*win)));
                     if (attack)
                     {
                         if (projectileCount >= 10)
