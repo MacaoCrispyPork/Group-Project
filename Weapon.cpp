@@ -13,11 +13,6 @@ Weapon::Weapon(int damage, int fireRate, int projSize, int projSpeed)
     this->lastAttack = clock();
 }
 
-std::optional<Projectile> Weapon::attack(sf::Vector2f position, sf::Vector2f destination, bool isPlayer) 
-{
-    return std::nullopt;
-}
-
 clock_t Weapon::getLastAttack()
 {
     return lastAttack;

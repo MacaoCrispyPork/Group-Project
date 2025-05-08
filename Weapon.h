@@ -22,7 +22,7 @@ public:
     Weapon();
     Weapon(int damage, int fireRate, int projSize, int projSpeed);
 
-    virtual std::optional<Projectile> attack(sf::Vector2f position, sf::Vector2f destination, bool isPlayer);
+    virtual std::optional<Projectile> attack(sf::Vector2f position, sf::Vector2f destination, bool isPlayer) = 0;
 
     clock_t getLastAttack();
     int getFireRate();
