@@ -6,7 +6,7 @@ Bow::Bow(int damage, int fireRate, int projSize, int projSpeed, int range)
     : Weapon(damage, fireRate, projSize, projSpeed),
       range(range) {}
 
-sf::Vector2f Bow::calculateRange(sf::Vector2f position, sf::Vector2f destination, int range)
+sf::Vector2f Bow::calculateRange(sf::Vector2f position, sf::Vector2f destination)
 {
     sf::Vector2f direction = destination - position;
     float length = std::sqrt(direction.x * direction.x + direction.y * direction.y);
@@ -22,7 +22,7 @@ std::optional<Projectile> Bow::attack(sf::Vector2f position, sf::Vector2f destin
     if (((float)(clock() - lastAttack) / CLOCKS_PER_SEC) > fireRate)
     {
         this->lastAttack = clock();
-        sf::Vector2f endpoint = calculateRange(position, destination, range);
+        sf::Vector2f endpoint = calculateRange(position, destination);
         // compared to Bow the endpoint = destination
         return Projectile(projSize, position, sf::Color::Red, projSpeed, endpoint, isPlayer, damage);
     }
