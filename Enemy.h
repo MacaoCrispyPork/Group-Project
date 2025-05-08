@@ -11,7 +11,7 @@ protected:
     int xp;
 
 public:
-Enemy();
+    Enemy();
     Enemy(int r, sf::Vector2f position, int speed, int health, Weapon *weapon, int xp);
     void setPosition(Player *player);
 };
