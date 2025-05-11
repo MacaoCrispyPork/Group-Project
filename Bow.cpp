@@ -2,7 +2,7 @@
 
 Bow::Bow() : Bow(0, 0, 0, 0, 0) {}
 
-Bow::Bow(int damage, int fireRate, int projSize, int projSpeed, int range)
+Bow::Bow(int damage, float fireRate, int projSize, int projSpeed, int range)
     : Weapon(damage, fireRate, projSize, projSpeed),
       range(range) {}
 

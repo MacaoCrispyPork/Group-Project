@@ -10,7 +10,7 @@ class Sword : public Weapon
 {
 public:
     Sword();
-    Sword(int damage, int fireRate, int projSize, int projSpeed);
+    Sword(int damage, float fireRate, int projSize, int projSpeed);
     std::optional<Projectile> attack(sf::Vector2f position, sf::Vector2f destination, bool isPlayer) override;
 };
 #endif

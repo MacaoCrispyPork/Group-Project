@@ -1,7 +1,7 @@
 #include "Sword.h"
 
 Sword::Sword() : Sword(0, 0, 0, 0) {}
-Sword::Sword(int damage, int fireRate, int projSize, int projSpeed)
+Sword::Sword(int damage, float fireRate, int projSize, int projSpeed)
     : Weapon(damage, fireRate, projSize, projSpeed) {}
 
 std::optional<Projectile> Sword::attack(sf::Vector2f position, sf::Vector2f destination, bool isPlayer)
