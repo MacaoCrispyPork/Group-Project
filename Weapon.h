@@ -16,7 +16,6 @@ protected:
     int projSize;
     int projSpeed;
     clock_t lastAttack;
-    Projectile *projectile;
 
 public:
     Weapon();
