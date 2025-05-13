@@ -17,63 +17,75 @@ Game::Game(int sizeX, int sizeY, std::string title)
     // Filling the projectile array with generic projectiles
     for (int i = 0; i < 10; i++)
     {
-        //all_projectiles[i] = new Projectile();
+        // all_projectiles[i] = new Projectile();
     }
     projectileCount = 0;
 }
 
-void Game::run() {
-    while (win->isOpen()) {
+void Game::run()
+{
+    while (win->isOpen())
+    {
         bool isFocused = handleEvents();
 
-        if (isFocused) {
+        if (isFocused)
+        {
             updateGameState();
             render();
         }
     }
 }
 
-bool Game::handleEvents() {
+bool Game::handleEvents()
+{
     sf::Event event;
     bool isFocused = true;
 
-    while (win->pollEvent(event)) {
-        switch (event.type) {
-            case sf::Event::Closed:
-                win->close();
-                break;
-            case sf::Event::GainedFocus:
-                std::cout << "Gained" << std::endl;
-                isFocused = true;
-                break;
-            case sf::Event::LostFocus:
-                std::cout << "Lost" << std::endl;
-                isFocused = false;
-                break;
-            case sf::Event::KeyPressed:
-                if (event.key.code == sf::Keyboard::Space) {
-                    handlePlayerAttack();
-                }
-                break;
-            default:
-                break;
+    while (win->pollEvent(event))
+    {
+        switch (event.type)
+        {
+        case sf::Event::Closed:
+            win->close();
+            break;
+        case sf::Event::GainedFocus:
+            std::cout << "Gained" << std::endl;
+            isFocused = true;
+            break;
+        case sf::Event::LostFocus:
+            std::cout << "Lost" << std::endl;
+            isFocused = false;
+            break;
+        case sf::Event::KeyPressed:
+            if (event.key.code == sf::Keyboard::Space)
+            {
+                handlePlayerAttack();
+            }
+            break;
+        default:
+            break;
         }
     }
 
     return isFocused;
 }
 
-void Game::handlePlayerAttack() {
+void Game::handlePlayerAttack()
+{
     std::optional<Projectile> attack = player->attack(sf::Vector2f(sf::Mouse::getPosition(*win)));
-    if (attack) {
-        if (projectileCount >= 10) projectileCount = 0;
-        if (all_projectiles[projectileCount]) delete all_projectiles[projectileCount];
+    if (attack)
+    {
+        if (projectileCount >= 10)
+            projectileCount = 0;
+        if (all_projectiles[projectileCount])
+            delete all_projectiles[projectileCount];
         all_projectiles[projectileCount] = new Projectile(attack.value());
         projectileCount++;
     }
 }
 
-void Game::updateGameState() {
+void Game::updateGameState()
+{
     player->setPosition(win);
     moveCharacters();
     moveProjectiles();
@@ -81,33 +93,45 @@ void Game::updateGameState() {
     handleProjectileCollisions();
 }
 
-void Game::moveCharacters() {
-    for (int i = 0; i < 10; i++) {
-        if (all_characters[i]) {
+void Game::moveCharacters()
+{
+    for (int i = 0; i < 10; i++)
+    {
+        if (all_characters[i])
+        {
             all_characters[i]->move();
         }
     }
 }
 
-void Game::moveProjectiles() {
-    for (int i = 0; i < 10; i++) {
-        if (all_projectiles[i]) {
+void Game::moveProjectiles()
+{
+    for (int i = 0; i < 10; i++)
+    {
+        if (all_projectiles[i])
+        {
             all_projectiles[i]->move();
         }
     }
 }
 
-void Game::handleCharacterCollisions() {
-    for (int i = 0; i < 10; i++) {
-        if (all_characters[i]) {
-            for (int j = 0; j < 10; j++) {
-                if (all_characters[i]->checkCollision(all_projectiles[j])) {
+void Game::handleCharacterCollisions()
+{
+    for (int i = 0; i < 10; i++)
+    {
+        if (all_characters[i])
+        {
+            for (int j = 0; j < 10; j++)
+            {
+                if (all_characters[i]->checkCollision(all_projectiles[j]))
+                {
                     std::cout << clock() / CLOCKS_PER_SEC << " : " << all_characters[i]->getType() << " " << i
                               << " collided with " << all_projectiles[j]->getType() << " " << j << std::endl;
                     all_characters[i]->takeDamage(all_projectiles[j]->getDamage());
                 }
             }
-            if (all_characters[i]->getIsDestroyed()) {
+            if (all_characters[i]->getIsDestroyed())
+            {
                 delete all_characters[i];
                 all_characters[i] = nullptr;
             }
@@ -115,16 +139,22 @@ void Game::handleCharacterCollisions() {
     }
 }
 
-void Game::handleProjectileCollisions() {
-    for (int i = 0; i < 10; i++) {
-        if (all_projectiles[i]) {
-            for (int j = 0; j < 10; j++) {
-                if (all_projectiles[i]->checkCollision(all_characters[j])) {
+void Game::handleProjectileCollisions()
+{
+    for (int i = 0; i < 10; i++)
+    {
+        if (all_projectiles[i])
+        {
+            for (int j = 0; j < 10; j++)
+            {
+                if (all_projectiles[i]->checkCollision(all_characters[j]))
+                {
                     std::cout << float(clock() / CLOCKS_PER_SEC) << " : " << all_projectiles[i]->getType() << " " << i
                               << " collided with " << all_characters[j]->getType() << " " << j << std::endl;
                 }
             }
-            if (all_projectiles[i]->getIsDestroyed()) {
+            if (all_projectiles[i]->getIsDestroyed())
+            {
                 delete all_projectiles[i];
                 all_projectiles[i] = nullptr;
             }
@@ -132,13 +162,18 @@ void Game::handleProjectileCollisions() {
     }
 }
 
-void Game::render() {
+void Game::render()
+{
     win->clear();
-    for (int i = 0; i < 10; i++) {
-        if (all_characters[i]) all_characters[i]->draw(win);
+    for (int i = 0; i < 10; i++)
+    {
+        if (all_characters[i])
+            all_characters[i]->draw(win);
     }
-    for (int i = 0; i < 10; i++) {
-        if (all_projectiles[i]) all_projectiles[i]->draw(win);
+    for (int i = 0; i < 10; i++)
+    {
+        if (all_projectiles[i])
+            all_projectiles[i]->draw(win);
     }
     win->display();
 }
