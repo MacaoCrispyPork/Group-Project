@@ -32,7 +32,6 @@ void Entity::move()
     // Multiply by speed
     movement *= speed;
     // Moves the entity only if it is further away from its destination then half the speed. This value can be tweaked
-    sf::Vector2f distance = getPosition() - destination;
     if (length > speed/2)
     {
         body->move(movement);
