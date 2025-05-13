@@ -2,23 +2,37 @@
 
 #include "Weapon.h"
 
-Weapon::Weapon() : Weapon(0, 0, 0, 0) {}
+Weapon::Weapon() : Weapon(0, 0, 0, 0, 0) {}
 
-Weapon::Weapon(int damage, float fireRate, int projSize, int projSpeed)
+Weapon::Weapon(int damage, float fireRate, int projSize, int projSpeed, int range)
     : damage(damage),
       fireRate(fireRate),
       projSize(projSize), 
-      projSpeed(projSpeed) 
+      projSpeed(projSpeed),
+      range(range)
 {
     this->lastAttack = clock();
 }
 
-clock_t Weapon::getLastAttack()
+sf::Vector2f Weapon::calculateRange(sf::Vector2f position, sf::Vector2f destination)
 {
-    return lastAttack;
+    sf::Vector2f direction = destination - position;
+    float length = std::sqrt(direction.x * direction.x + direction.y * direction.y);
+    if (length != 0)
+    {
+        direction /= length;
+    }
+    return position + direction * static_cast<float>(range);
 }
 
-int Weapon::getFireRate()
+std::optional<Projectile> Weapon::attack(sf::Vector2f position, sf::Vector2f destination, bool isPlayer)
 {
-    return fireRate;
+    if (((float)(clock() - lastAttack) / CLOCKS_PER_SEC) > fireRate)
+    {
+        this->lastAttack = clock();
+        sf::Vector2f endpoint = calculateRange(position, destination);
+        // compared to Weapon the endpoint = destination
+        return std::optional<Projectile>{Projectile(projSize, position, sf::Color::Red, projSpeed, endpoint, isPlayer, damage)};
+    }
+    return std::nullopt;
 }

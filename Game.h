@@ -5,7 +5,6 @@
 #include "Character.h"
 #include "Weapon.h"
 #include "Projectile.h"
-#include "Bow.h"
 #include "Zombie.h"
 #include "Skeleton.h"
 

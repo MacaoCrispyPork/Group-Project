@@ -15,15 +15,16 @@ protected:
     float fireRate;
     int projSize;
     int projSpeed;
+    int range;
     clock_t lastAttack;
 
 public:
     Weapon();
-    Weapon(int damage, float fireRate, int projSize, int projSpeed);
+    Weapon(int damage, float fireRate, int projSize, int projSpeed, int range);
 
-    virtual std::optional<Projectile> attack(sf::Vector2f position, sf::Vector2f destination, bool isPlayer) = 0;
-
+    std::optional<Projectile> attack(sf::Vector2f position, sf::Vector2f destination, bool isPlayer);
     clock_t getLastAttack();
     int getFireRate();
+    sf::Vector2f calculateRange(sf::Vector2f position, sf::Vector2f destination);
 };
 #endif
