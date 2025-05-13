@@ -1,6 +1,7 @@
 #include "Character.h"
 #include "Entity.h"
 #include "Weapon.h"
+#include <iostream>
 
 Character::Character() : Character(0, sf::Vector2(0.f, 0.f), sf::Color::Cyan, 0, false, 0, nullptr) {}
 
@@ -32,4 +33,10 @@ std::optional<Projectile> Character::attack(sf::Vector2f destination)
 
 Character::~Character() {
     delete weapon;
+}
+
+void Character::handleCollision(Projectile *projectile) {
+    if(Entity::checkCollision(projectile)) {
+        takeDamage(projectile->getDamage());
+    }
 }

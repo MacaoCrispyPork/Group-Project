@@ -10,7 +10,6 @@ protected:
     sf::CircleShape *body;
     float speed;
     sf::Vector2f destination;
-    // Not implemented in collision check yet
     bool isPlayer;
     bool isDestroyed;
 

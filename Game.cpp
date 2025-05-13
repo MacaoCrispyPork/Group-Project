@@ -6,13 +6,13 @@ Game::Game(int sizeX, int sizeY, std::string title)
     // Size of these arrays is just a random number probably best to replace with a variable
     all_characters = new Character *[10]{nullptr};
     all_projectiles = new Projectile *[10]{nullptr};
-    Weapon *weapon = new Weapon(10, 0.5, 2, 1, 300);
+    Weapon *weapon = new Weapon(1, 0.2, 2, 1, 300);
     player = new Player(10, sf::Vector2f(50, 50), 3, 1, weapon);
     all_characters[0] = player;
     // Creating Zombies with randomised position
     for (int i = 1; i < 10; i++)
     {
-        // all_characters[i] = new Zombie(5, sf::Vector2f(rand() % sizeX + 10, rand() % sizeY + 10), 1, 10, weapon, .1);
+        all_characters[i] = new Zombie(10, sf::Vector2f(rand() % sizeX + 10, rand() % sizeY + 10), 2, 3, new Weapon(*weapon), .1);
     }
     // Filling the projectile array with generic projectiles
     for (int i = 0; i < 10; i++)
@@ -91,6 +91,7 @@ void Game::updateGameState()
     moveProjectiles();
     handleCharacterCollisions();
     handleProjectileCollisions();
+    deleteDestroyedEntities();
 }
 
 void Game::moveCharacters()
@@ -119,22 +120,14 @@ void Game::handleCharacterCollisions()
 {
     for (int i = 0; i < 10; i++)
     {
-        if (all_characters[i])
+        if (!all_characters[i])
         {
-            for (int j = 0; j < 10; j++)
-            {
-                if (all_characters[i]->checkCollision(all_projectiles[j]))
-                {
-                    std::cout << clock() / CLOCKS_PER_SEC << " : " << all_characters[i]->getType() << " " << i
-                              << " collided with " << all_projectiles[j]->getType() << " " << j << std::endl;
-                    all_characters[i]->takeDamage(all_projectiles[j]->getDamage());
-                }
-            }
-            if (all_characters[i]->getIsDestroyed())
-            {
-                delete all_characters[i];
-                all_characters[i] = nullptr;
-            }
+            continue;
+        }
+
+        for (int j = 0; j < 10; j++)
+        {
+            all_characters[i]->handleCollision(all_projectiles[j]);
         }
     }
 }
@@ -143,21 +136,31 @@ void Game::handleProjectileCollisions()
 {
     for (int i = 0; i < 10; i++)
     {
-        if (all_projectiles[i])
+        if (!all_projectiles[i])
         {
-            for (int j = 0; j < 10; j++)
-            {
-                if (all_projectiles[i]->checkCollision(all_characters[j]))
-                {
-                    std::cout << float(clock() / CLOCKS_PER_SEC) << " : " << all_projectiles[i]->getType() << " " << i
-                              << " collided with " << all_characters[j]->getType() << " " << j << std::endl;
-                }
-            }
-            if (all_projectiles[i]->getIsDestroyed())
-            {
-                delete all_projectiles[i];
-                all_projectiles[i] = nullptr;
-            }
+            continue;
+        }
+
+        for (int j = 0; j < 10; j++)
+        {
+            all_projectiles[i]->handleCollision(all_characters[j]);
+            all_projectiles[i]->handleCollision(all_projectiles[j]);
+        }
+    }
+}
+
+void Game::deleteDestroyedEntities()
+{
+    for (int i = 0; i<10; i++) {
+        if (all_characters[i] && all_characters[i]->getIsDestroyed())
+        {
+            delete all_characters[i];
+            all_characters[i] = nullptr;
+        }
+        if (all_projectiles[i] && all_projectiles[i]->getIsDestroyed())
+        {
+            delete all_projectiles[i];
+            all_projectiles[i] = nullptr;
         }
     }
 }

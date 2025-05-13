@@ -21,6 +21,8 @@ public:
 
     int getDamage();
 
+    void handleCollision(Entity *entity);
+
     void move() override;
 };
 #endif

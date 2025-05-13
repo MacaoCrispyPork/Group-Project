@@ -27,6 +27,7 @@ public:
     void moveProjectiles();
     void handleCharacterCollisions();
     void handleProjectileCollisions();
+    void deleteDestroyedEntities();
     void render();
     ~Game();
 };

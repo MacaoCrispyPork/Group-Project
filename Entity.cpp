@@ -5,7 +5,7 @@
 Entity::Entity() : Entity(0, sf::Vector2(0.f, 0.f), sf::Color::Cyan, 0, sf::Vector2(0.f, 0.f), false) {}
 
 Entity::Entity(int r, sf::Vector2f position, sf::Color color, int speed,
-    sf::Vector2f destination, bool isPlayer)
+               sf::Vector2f destination, bool isPlayer)
     : speed(speed), destination(destination), isPlayer(isPlayer), isDestroyed(false)
 {
     body = new sf::CircleShape();
@@ -32,7 +32,7 @@ void Entity::move()
     // Multiply by speed
     movement *= speed;
     // Moves the entity only if it is further away from its destination then half the speed. This value can be tweaked
-    if (length > speed/2)
+    if (length > speed / 2)
     {
         body->move(movement);
     }
@@ -40,10 +40,14 @@ void Entity::move()
 
 bool Entity::checkCollision(Entity *entity)
 {
-    if (entity != nullptr) {
-        float distance = std::sqrt((body->getPosition().x - entity->body->getPosition().x) * (body->getPosition().x - entity->body->getPosition().x) + (body->getPosition().y - entity->body->getPosition().y) * (body->getPosition().y - entity->body->getPosition().y));
+    if (entity != nullptr && (entity->isPlayer != this->isPlayer))
+    {
+        sf::Vector2f relativePosition = body->getPosition() - entity->body->getPosition();
+        float distance = std::sqrt((relativePosition.x * relativePosition.x) + (relativePosition.y * relativePosition.y));
         return (distance < body->getRadius() + entity->body->getRadius());
-    } else {
+    }
+    else
+    {
         return false;
     }
 }

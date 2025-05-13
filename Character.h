@@ -20,6 +20,8 @@ public:
 
     void takeDamage(int damage);
 
+    void handleCollision(Projectile *projectile);
+
     std::optional<Projectile> attack(sf::Vector2f destination);
 
     ~Character();

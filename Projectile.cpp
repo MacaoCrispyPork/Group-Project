@@ -2,6 +2,7 @@
 #include "Entity.h"
 #include <SFML/Graphics.hpp>
 #include <cmath>
+#include <iostream>
 
 // todo: color based on isPlayer
 Projectile::Projectile() : Projectile(0, sf::Vector2(0.f, 0.f), sf::Color::Black, 0, sf::Vector2(0.f, 0.f), false, 0) {}
@@ -27,6 +28,12 @@ void Projectile::move(){
     sf::Vector2f distance = getPosition() - destination;
     if (std::sqrt(distance.x*distance.x + distance.y*distance.y) < speed/2)
     {
+        isDestroyed = true;
+    }
+}
+
+void Projectile::handleCollision(Entity *entity) {
+    if(Entity::checkCollision(entity)) {
         isDestroyed = true;
     }
 }
