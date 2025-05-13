@@ -21,5 +21,7 @@ public:
     void takeDamage(int damage);
 
     std::optional<Projectile> attack(sf::Vector2f destination);
+
+    ~Character();
 };
 #endif
