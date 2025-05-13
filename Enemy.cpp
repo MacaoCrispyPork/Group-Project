@@ -17,3 +17,13 @@ std::string Enemy::getType()
 {
     return "Enemy";
 }
+
+void Enemy::takeDamage(int damage)
+{
+    this->health -= damage;
+}
+
+std::optional<Projectile> Enemy::attack(sf::Vector2f destination)
+{
+    return this->weapon->attack(this->getPosition(), destination, this->isPlayer);
+}

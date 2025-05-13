@@ -74,7 +74,7 @@ void Game::run()
                 {
                     all_characters[i]->move(player->getDestination());
                 }
-                else if (all_characters[i]->getType() == "Zombie")
+                else if (all_characters[i]->getType() == "Zombie" || "Skeleton")
                 {
                     all_characters[i]->move(player->getPosition());
                 }

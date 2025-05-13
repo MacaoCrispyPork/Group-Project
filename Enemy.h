@@ -15,5 +15,9 @@ Enemy();
     Enemy(int r, sf::Vector2f position, int speed, int health, Weapon *weapon, int xp);
     void setPosition(Player *player);
     std::string getType();
+    
+    void takeDamage(int damage);
+
+    std::optional<Projectile> attack(sf::Vector2f destination);
 };
 #endif

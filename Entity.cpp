@@ -5,8 +5,8 @@
 Entity::Entity() : Entity(0, sf::Vector2(0.f, 0.f), sf::Color::Cyan, 0, sf::Vector2(0.f, 0.f), NULL) {}
 
 Entity::Entity(int r, sf::Vector2f position, sf::Color color, int speed,
-    sf::Vector2f destination, bool isPlayer)
-    : speed(speed), isPlayer(isPlayer)
+               sf::Vector2f destination, bool isPlayer)
+    : speed(speed), isPlayer(isPlayer), destination(destination)
 {
     body = new sf::CircleShape();
     body->setRadius(r);
@@ -16,7 +16,7 @@ Entity::Entity(int r, sf::Vector2f position, sf::Color color, int speed,
     body->setOrigin(r / 2, r / 2);
 }
 
-Entity::Entity(const Entity &entity) : speed(entity.speed), isPlayer(entity.isPlayer)
+Entity::Entity(const Entity &entity) : speed(entity.speed), isPlayer(entity.isPlayer), destination(entity.destination)
 {
     body = new sf::CircleShape(*entity.body);
 }
@@ -45,10 +45,13 @@ void Entity::move(sf::Vector2f finish)
 
 bool Entity::checkCollision(Entity *entity)
 {
-    if (entity != nullptr) {
+    if (entity != nullptr)
+    {
         float distance = std::sqrt((body->getPosition().x - entity->body->getPosition().x) * (body->getPosition().x - entity->body->getPosition().x) + (body->getPosition().y - entity->body->getPosition().y) * (body->getPosition().y - entity->body->getPosition().y));
         return (distance < body->getRadius() + entity->body->getRadius());
-    } else {
+    }
+    else
+    {
         return false;
     }
 }
