@@ -7,15 +7,15 @@
 #include "Projectile.h"
 #include "Zombie.h"
 #include "Skeleton.h"
+#include <vector>
 
 class Game
 {
 private:
     sf::RenderWindow *win;
     Player *player;
-    Character **all_characters;
-    Projectile **all_projectiles;
-    int projectileCount;
+    std::vector<Enemy*> all_enemies;
+    std::vector<Projectile*> all_projectiles;
 
 public:
     Game(int sizeX, int sizeY, std::string title);
@@ -23,11 +23,10 @@ public:
     bool handleEvents();
     void handlePlayerAttack();
     void updateGameState();
-    void moveCharacters();
-    void moveProjectiles();
-    void handleCharacterCollisions();
-    void handleProjectileCollisions();
+    void moveEntities();
+    void handleCollisions();
     void deleteDestroyedEntities();
+    void updateAI();
     void render();
     ~Game();
 };

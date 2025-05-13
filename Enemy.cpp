@@ -9,7 +9,4 @@ Enemy::Enemy(int r, sf::Vector2f position, int speed, int health, Weapon *weapon
     : Character(r, position, sf::Color::Green, speed, false, health, weapon),
       xp(xp) {}
 
-void Enemy::setPosition(Player *player)
-{
-    destination = player->getPosition();
-}
+std::string Enemy::getType() { return "Enemy"; }
