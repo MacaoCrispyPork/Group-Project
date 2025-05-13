@@ -4,7 +4,7 @@
 
 Entity::Entity() : Entity(0, sf::Vector2(0.f, 0.f), sf::Color::Cyan, 0, sf::Vector2(0.f, 0.f), false) {}
 
-Entity::Entity(int r, sf::Vector2f position, sf::Color color, int speed,
+Entity::Entity(int r, sf::Vector2f position, sf::Color color, float speed,
                sf::Vector2f destination, bool isPlayer)
     : speed(speed), destination(destination), isPlayer(isPlayer), isDestroyed(false)
 {

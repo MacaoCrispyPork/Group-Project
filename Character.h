@@ -13,7 +13,7 @@ protected:
 public:
     Character();
 
-    Character(int r, sf::Vector2f position, sf::Color color, int speed,
+    Character(int r, sf::Vector2f position, sf::Color color, float speed,
               bool isPlayer, int health, Weapon *weapon);
 
     Weapon *getWeapon();

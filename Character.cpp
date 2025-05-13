@@ -5,7 +5,7 @@
 
 Character::Character() : Character(0, sf::Vector2(0.f, 0.f), sf::Color::Cyan, 0, false, 0, nullptr) {}
 
-Character::Character(int r, sf::Vector2f position, sf::Color color, int speed,
+Character::Character(int r, sf::Vector2f position, sf::Color color, float speed,
                      bool isPlayer, int health, Weapon *weapon)
     : Entity(r, position, color, speed,
              position, isPlayer),

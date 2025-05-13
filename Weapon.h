@@ -20,7 +20,7 @@ protected:
 
 public:
     Weapon();
-    Weapon(int damage, float fireRate, int projSize, int projSpeed, int range);
+    Weapon(int damage, float fireRate, int projSize, float projSpeed, int range);
 
     std::optional<Projectile> attack(sf::Vector2f position, sf::Vector2f destination, bool isPlayer);
     clock_t getLastAttack();

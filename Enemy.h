@@ -11,7 +11,7 @@ protected:
 
 public:
     Enemy();
-    Enemy(int r, sf::Vector2f position, int speed, int health, Weapon *weapon, int xp);
+    Enemy(int r, sf::Vector2f position, float speed, int health, Weapon *weapon, int xp);
     std::string getType() override;
     virtual std::optional<Projectile> updateAI(sf::Vector2f playerPosition) = 0;
 };

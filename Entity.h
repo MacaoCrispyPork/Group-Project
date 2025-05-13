@@ -15,7 +15,7 @@ protected:
 
 public:
     Entity();
-    Entity(int r, sf::Vector2f position, sf::Color color, int speed,
+    Entity(int r, sf::Vector2f position, sf::Color color, float speed,
         sf::Vector2f destination, bool isPlayer);
     Entity(const Entity &entity);
 

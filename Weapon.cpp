@@ -4,7 +4,7 @@
 
 Weapon::Weapon() : Weapon(0, 0, 0, 0, 0) {}
 
-Weapon::Weapon(int damage, float fireRate, int projSize, int projSpeed, int range)
+Weapon::Weapon(int damage, float fireRate, int projSize, float projSpeed, int range)
     : damage(damage),
       fireRate(fireRate),
       projSize(projSize), 
