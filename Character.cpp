@@ -19,6 +19,10 @@ Weapon *Character::getWeapon()
 void Character::takeDamage(int damage)
 {
     this->health -= damage;
+    if (health <= 0)
+    {
+        this->isDestroyed = true;
+    }
 }
 
 std::optional<Projectile> Character::attack(sf::Vector2f destination)
