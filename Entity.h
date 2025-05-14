@@ -10,17 +10,18 @@ protected:
     sf::CircleShape *body;
     float speed;
     sf::Vector2f destination;
-    // Not implemented in collision check yet
     bool isPlayer;
+    bool isDestroyed;
 
 public:
     Entity();
-    Entity(int r, sf::Vector2f position, sf::Color color, int speed,
+    Entity(int r, sf::Vector2f position, sf::Color color, float speed,
         sf::Vector2f destination, bool isPlayer);
+    Entity(const Entity &entity);
 
-    virtual std::string getType();
+    virtual std::string getType() = 0;
 
-    void move(sf::Vector2f finish);
+    virtual void move();
 
     bool checkCollision(Entity *entity);
 
@@ -31,6 +32,8 @@ public:
     sf::Vector2f getDestination();
 
     float getSpeed();
+
+    bool getIsDestroyed();
 
     ~Entity();
 };

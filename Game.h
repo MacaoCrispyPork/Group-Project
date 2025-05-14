@@ -5,21 +5,28 @@
 #include "Character.h"
 #include "Weapon.h"
 #include "Projectile.h"
-#include "Bow.h"
 #include "Zombie.h"
 #include "Skeleton.h"
+#include <vector>
 
 class Game
 {
 private:
     sf::RenderWindow *win;
     Player *player;
-    Character **all_characters;
-    Projectile **all_projectile;
-    int projectileCount;
+    std::vector<Enemy*> all_enemies;
+    std::vector<Projectile*> all_projectiles;
 
 public:
     Game(int sizeX, int sizeY, std::string title);
     void run();
+    bool handleEvents();
+    void handlePlayerAttack();
+    void updateGameState();
+    void moveEntities();
+    void handleCollisions();
+    void deleteDestroyedEntities();
+    void updateAI();
+    void render();
     ~Game();
 };

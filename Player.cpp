@@ -7,15 +7,15 @@
 
 Player::Player() : Player(0, sf::Vector2(0.f, 0.f), 0, 0, nullptr) {}
 
-Player::Player(int r, sf::Vector2f position, int speed, int health, Weapon *weapon)
-    : Character(r, position, sf::Color::Cyan, speed, 1, health, weapon),
+Player::Player(int r, sf::Vector2f position, float speed, int health, Weapon *weapon)
+    : Character(r, position, sf::Color::Cyan, speed, true, health, weapon),
       level(0) {}
 
 void Player::setPosition(sf::RenderWindow *win)
 {
     if (sf::Mouse::isButtonPressed(sf::Mouse::Right))
     {
-        destination = sf::Vector2f(sf::Mouse::getPosition(*win).x, sf::Mouse::getPosition(*win).y);
+        destination = sf::Vector2f(sf::Mouse::getPosition(*win));
     }
 }
 

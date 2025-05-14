@@ -1,29 +1,39 @@
 #include <optional>
-
+#include <iostream>
 #include "Weapon.h"
 
-Weapon::Weapon() : Weapon(0, 0, 0, 0) {}
+Weapon::Weapon() : Weapon(0, 0, 0, 0, 0) {}
 
-Weapon::Weapon(int damage, int fireRate, int projSize, int projSpeed)
+Weapon::Weapon(int damage, float fireRate, int projSize, float projSpeed, int range)
     : damage(damage),
-      fireRate(fireRate), 
+      fireRate(fireRate),
       projSize(projSize), 
-      projSpeed(projSpeed) 
+      projSpeed(projSpeed),
+      range(range)
 {
     this->lastAttack = clock();
 }
 
-std::optional<Projectile> Weapon::attack(sf::Vector2f position, sf::Vector2f destination, bool isPlayer) 
+sf::Vector2f Weapon::calculateRange(sf::Vector2f position, sf::Vector2f destination)
 {
-    return std::nullopt;
+    sf::Vector2f direction = destination - position;
+    float length = std::sqrt(direction.x * direction.x + direction.y * direction.y);
+    if (length != 0)
+    {
+        direction /= length;
+    }
+    return position + direction * static_cast<float>(range);
 }
 
-clock_t Weapon::getLastAttack()
+std::optional<Projectile> Weapon::attack(sf::Vector2f position, sf::Vector2f destination, bool isPlayer)
 {
-    return lastAttack;
-}
+    if (((float)(clock() - lastAttack) / CLOCKS_PER_SEC) < fireRate)
+    {
+        return std::nullopt;
+    }
 
-int Weapon::getFireRate()
-{
-    return fireRate;
+    this->lastAttack = clock();
+    sf::Vector2f endpoint = calculateRange(position, destination);
+    // compared to Weapon the endpoint = destination
+    return std::optional<Projectile>{Projectile(projSize, position, sf::Color::Red, projSpeed, endpoint, isPlayer, damage)};
 }

@@ -12,19 +12,19 @@ class Weapon
 {
 protected:
     int damage;
-    int fireRate;
+    float fireRate;
     int projSize;
     int projSpeed;
+    int range;
     clock_t lastAttack;
-    Projectile *projectile;
 
 public:
     Weapon();
-    Weapon(int damage, int fireRate, int projSize, int projSpeed);
+    Weapon(int damage, float fireRate, int projSize, float projSpeed, int range);
 
-    virtual std::optional<Projectile> attack(sf::Vector2f position, sf::Vector2f destination, bool isPlayer);
-
+    std::optional<Projectile> attack(sf::Vector2f position, sf::Vector2f destination, bool isPlayer);
     clock_t getLastAttack();
     int getFireRate();
+    sf::Vector2f calculateRange(sf::Vector2f position, sf::Vector2f destination);
 };
 #endif
