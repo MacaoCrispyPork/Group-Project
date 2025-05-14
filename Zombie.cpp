@@ -7,5 +7,5 @@ Zombie::Zombie(int r, sf::Vector2f position, float speed, int health, Weapon *we
 
 std::optional<Projectile> Zombie::updateAI(sf::Vector2f playerPosition) {
     destination = playerPosition;
-    return attack(destination);
+    return attack(playerPosition);
 }

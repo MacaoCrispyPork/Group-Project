@@ -4,7 +4,7 @@
 
 Weapon::Weapon() : Weapon(0, 0, 0, 0, 0) {}
 
-Weapon::Weapon(int damage, float fireRate, int projSize, float projSpeed, int range)
+Weapon::Weapon(int damage, float fireRate, int projSize, float projSpeed, float range)
     : damage(damage),
       fireRate(fireRate),
       projSize(projSize), 
@@ -22,7 +22,7 @@ sf::Vector2f Weapon::calculateRange(sf::Vector2f position, sf::Vector2f destinat
     {
         direction /= length;
     }
-    return position + direction * static_cast<float>(range);
+    return direction * range + position;
 }
 
 std::optional<Projectile> Weapon::attack(sf::Vector2f position, sf::Vector2f destination, bool isPlayer)

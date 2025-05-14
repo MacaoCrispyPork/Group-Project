@@ -1,7 +1,4 @@
 #pragma once
-
-#include <SFML/Graphics.hpp>
-#include <cmath>
 #include "Enemy.h"
 
 class Skeleton : public Enemy

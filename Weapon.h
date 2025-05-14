@@ -14,13 +14,13 @@ protected:
     int damage;
     float fireRate;
     int projSize;
-    int projSpeed;
-    int range;
+    float projSpeed;
+    float range;
     clock_t lastAttack;
 
 public:
     Weapon();
-    Weapon(int damage, float fireRate, int projSize, float projSpeed, int range);
+    Weapon(int damage, float fireRate, int projSize, float projSpeed, float range);
 
     std::optional<Projectile> attack(sf::Vector2f position, sf::Vector2f destination, bool isPlayer);
     clock_t getLastAttack();

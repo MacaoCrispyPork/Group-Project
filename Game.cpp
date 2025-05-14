@@ -8,13 +8,13 @@ Game::Game(int sizeX, int sizeY, std::string title)
     // Creating Zombies with randomised position
     for (int i = 1; i < 10; i++)
     {
-        all_enemies.push_back(new Zombie(10, sf::Vector2f(rand() % sizeX + 10, rand() % sizeY + 10), 1, 3, new Weapon(1, 1, 2, 0.5, 50), .1));
+        all_enemies.push_back(new Zombie(10, sf::Vector2f(rand() % sizeX + 10, rand() % sizeY + 10), 0.5, 3, new Weapon(1, 1, 2, 1, 150), .1));
     }
     // Filling the projectile array with generic projectiles
-    for (int i = 0; i < 10; i++)
-    {
-        // all_projectiles[i] = new Projectile();
-    }
+    // for (int i = 0; i < 10; i++)
+    // {
+    //     all_projectiles.push_back(new Projectile());
+    // }
 }
 
 void Game::run()
