@@ -16,7 +16,7 @@ Entity::Entity(int r, sf::Vector2f position, sf::Color color, float speed,
     body->setOrigin(r / 2, r / 2);
 }
 
-Entity::Entity(const Entity &entity) : speed(entity.speed), destination(entity.destination), isPlayer(entity.isPlayer)
+Entity::Entity(const Entity &entity) : speed(entity.speed), destination(entity.destination), isPlayer(entity.isPlayer), isDestroyed(false)
 {
     body = new sf::CircleShape(*entity.body);
 }
@@ -28,7 +28,7 @@ void Entity::move()
     // Finds the length of the vector
     float length = std::sqrt(movement.x * movement.x + movement.y * movement.y);
     // Divide by length to normalise the length of the vector to 1
-    movement /= length;
+    if (length != 0) movement /= length;
     // Multiply by speed
     movement *= speed;
     // Moves the entity only if it is further away from its destination then half the speed. This value can be tweaked

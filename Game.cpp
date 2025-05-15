@@ -5,16 +5,11 @@ Game::Game(int sizeX, int sizeY, std::string title)
     win = new sf::RenderWindow(sf::VideoMode(sizeX, sizeY), title);
     Weapon *weapon = new Weapon(1, 0.2, 2, 1, 300);
     player = new Player(10, sf::Vector2f(50, 50), 3, 1, weapon);
-    // Creating Zombies with randomised position
-    for (int i = 1; i < 10; i++)
+    // Creating Enemies with randomised position
+    for (int i = 0; i < 3; i++)
     {
-        all_enemies.push_back(new Zombie(10, sf::Vector2f(rand() % sizeX + 10, rand() % sizeY + 10), 0.5, 3, new Weapon(1, 1, 2, 1, 150), .1));
+        all_enemies.push_back(new Skeleton(10, sf::Vector2f(rand() % sizeX + 10, rand() % sizeY + 10), 0.5, 3, new Weapon(1, 1, 10, 1, 300), .1));
     }
-    // Filling the projectile array with generic projectiles
-    // for (int i = 0; i < 10; i++)
-    // {
-    //     all_projectiles.push_back(new Projectile());
-    // }
 }
 
 void Game::run()
@@ -78,9 +73,9 @@ void Game::updateGameState()
 {
     player->setPosition(win);
     moveEntities();
+    updateAI();
     handleCollisions();
     deleteDestroyedEntities();
-    updateAI();
 }
 
 void Game::moveEntities()
@@ -107,12 +102,16 @@ void Game::handleCollisions()
             j->handleCollision(i);
             i->handleCollision(j);
         }
+        for (Projectile *k : all_projectiles)
+        {
+            i->handleCollision(k);
+        }
     }
 }
 
 void Game::deleteDestroyedEntities()
 {
-    for (int i = 0; i < all_projectiles.size(); i++)
+    for (int i = all_projectiles.size()-1; i >= 0; i--)
     {
         if (all_projectiles[i]->getIsDestroyed())
         {
@@ -120,7 +119,7 @@ void Game::deleteDestroyedEntities()
             all_projectiles.erase(all_projectiles.begin() + i);
         }
     }
-    for (int i = 0; i < all_enemies.size(); i++)
+    for (int i = all_enemies.size()-1; i >= 0; i--)
     {
         if (all_enemies[i]->getIsDestroyed())
         {
@@ -159,6 +158,7 @@ void Game::render()
 
 Game::~Game()
 {
+    delete win;
     delete player;
     for (int i = 0; i < all_projectiles.size(); i++)
     {
