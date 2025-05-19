@@ -3,11 +3,12 @@
 #include "Button.h"
 #include "GameState.h"
 
+// export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0.0
 int main()
 {
-    srand(time(0));
+    // srand(time(0)); 
 
-    sf::RenderWindow window(sf::VideoMode(800, 600), "Slayer Menu");
+    sf::RenderWindow window(sf::VideoMode(1920, 1080), "Slayer Menu");
 
     sf::Font font;
     if (!font.loadFromFile("ARIAL.TTF"))
@@ -53,7 +54,7 @@ int main()
                     {
                         // You can use a flag here to distinguish Option 1 vs 2
                         window.close(); // Close menu window
-                        Game g(500, 500, "Slayer");
+                        Game g(1920, 1080, "Slayer");
                         g.run();  // Start the game
                         return 0; // Exit after game finishes
                     }
