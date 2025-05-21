@@ -34,7 +34,11 @@ int main()
 
             if (event.type == sf::Event::MouseButtonPressed)
             {
-                sf::Vector2i mouse(event.mouseButton.x, event.mouseButton.y);
+                    else if (quitBtn.isClicked(mouse))
+                    {
+                        window.close();
+                    }
+                }sf::Vector2i mouse(event.mouseButton.x, event.mouseButton.y);
 
                 if (state == gameState::Main_Menu)
                 {
@@ -42,11 +46,7 @@ int main()
                     {
                         state = gameState::Weapons_Menu;
                     }
-                    else if (quitBtn.isClicked(mouse))
-                    {
-                        window.close();
-                    }
-                }
+                
 
                 else if (state == gameState::Weapons_Menu)
                 {
