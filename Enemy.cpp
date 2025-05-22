@@ -3,10 +3,10 @@
 #include "Character.h"
 #include "Player.h"
 
-Enemy::Enemy() : Enemy(0, sf::Vector2(0.f, 0.f), 0, 0, nullptr, 0) {}
+Enemy::Enemy() : Enemy(0, sf::Vector2(0.f, 0.f), 0, 0, nullptr, 0, 0) {}
 
-Enemy::Enemy(int r, sf::Vector2f position, float speed, int health, Weapon *weapon, int xp)
+Enemy::Enemy(int r, sf::Vector2f position, float speed, int health, Weapon *weapon, int xp, float updateInterval)
     : Character(r, position, sf::Color::Green, speed, false, health, weapon),
-      xp(xp) {}
+      xp(xp), updateInterval(updateInterval) { lastUpdate = clock(); }
 
 std::string Enemy::getType() { return "Enemy"; }

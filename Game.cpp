@@ -8,7 +8,7 @@ Game::Game(int sizeX, int sizeY, std::string title)
     // Creating Enemies with randomised position
     for (int i = 0; i < 3; i++)
     {
-        all_enemies.push_back(new Skeleton(10, sf::Vector2f(rand() % sizeX + 10, rand() % sizeY + 10), 0.5, 3, new Weapon(1, 1, 10, 1, 300), .1));
+        all_enemies.push_back(new Skeleton(10, sf::Vector2f(rand() % sizeX + 10, rand() % sizeY + 10), 0.5, 3, new Weapon(1, 1, 10, 1, 300), .1, 0.2));
     }
 }
 
