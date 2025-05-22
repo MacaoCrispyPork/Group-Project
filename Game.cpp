@@ -1,4 +1,5 @@
 #include "Game.h"
+#include <fstream>
 
 Game::Game(int sizeX, int sizeY, std::string title)
 {
@@ -48,6 +49,24 @@ void Game::run()
         {
             std::cout << "Game Over!" << std::endl;
             std::cout << "Score: " << score << std::endl;
+
+            // High score logic
+            int highscore = 0;
+            std::ifstream infile("highscore.txt");
+            if (infile.is_open()) {
+                infile >> highscore;
+                infile.close();
+            }
+            if (score > highscore) {
+                std::ofstream outfile("highscore.txt");
+                if (outfile.is_open()) {
+                    outfile << score;
+                    outfile.close();
+                }
+                highscore = score;
+            }
+            std::cout << "High Score: " << highscore << std::endl;
+
             win->close();
         }
     }
