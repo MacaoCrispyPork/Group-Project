@@ -5,6 +5,6 @@ class Skeleton : public Enemy
 {
 public:
     Skeleton();
-    Skeleton(int r, sf::Vector2f position, float speed, int health, Weapon *weapon, int xp);
+    Skeleton(int r, sf::Vector2f position, float speed, int health, Weapon *weapon, int xp, float updateInterval);
     std::optional<Projectile> updateAI(sf::Vector2f playerPosition) override;
 };
