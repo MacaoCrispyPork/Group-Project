@@ -31,12 +31,6 @@ public:
     // Output: optional Projectile if attack is possible
     std::optional<Projectile> attack(sf::Vector2f position, sf::Vector2f destination, bool isPlayer);
 
-    // Returns the time of the last attack
-    clock_t getLastAttack();
-
-    // Returns the fire rate (minimum time between attacks)
-    int getFireRate();
-
     // Calculates the endpoint of a projectile based on range
     // Inputs: position (start), destination (target)
     // Output: endpoint vector
