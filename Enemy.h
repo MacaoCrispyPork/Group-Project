@@ -16,5 +16,6 @@ public:
     Enemy(int r, sf::Vector2f position, float speed, int health, Weapon *weapon, int xp, float updateInterval);
     std::string getType() override;
     virtual std::optional<Projectile> updateAI(sf::Vector2f playerPosition) = 0;
+    int getxp();
 };
 #endif

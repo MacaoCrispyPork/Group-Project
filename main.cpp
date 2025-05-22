@@ -16,7 +16,7 @@ int main()
         return -1;
     }
 
-    gameState state = gameState::Main_Menu;
+    gameState state = gameState::MainMenu;
 
     // Buttons
     Button playBtn({200, 50}, {300, 200}, "Play!", font);
@@ -34,21 +34,22 @@ int main()
 
             if (event.type == sf::Event::MouseButtonPressed)
             {
+                sf::Vector2i mouse(event.mouseButton.x, event.mouseButton.y);
+
+                if (state == gameState::MainMenu)
+                {
+                    if (playBtn.isClicked(mouse))
+                    {
+                        state = gameState::WeaponsMenu;
+                    }
+                
                     else if (quitBtn.isClicked(mouse))
                     {
                         window.close();
                     }
-                }sf::Vector2i mouse(event.mouseButton.x, event.mouseButton.y);
+                }
 
-                if (state == gameState::Main_Menu)
-                {
-                    if (playBtn.isClicked(mouse))
-                    {
-                        state = gameState::Weapons_Menu;
-                    }
-                
-
-                else if (state == gameState::Weapons_Menu)
+                else if (state == gameState::WeaponsMenu)
                 {
                     if (wBow.isClicked(mouse) || wSword.isClicked(mouse))
                     {
@@ -64,12 +65,12 @@ int main()
 
         window.clear();
 
-        if (state == gameState::Main_Menu)
+        if (state == gameState::MainMenu)
         {
             playBtn.draw(window);
             quitBtn.draw(window);
         }
-        else if (state == gameState::Weapons_Menu)
+        else if (state == gameState::WeaponsMenu)
         {
             wBow.draw(window);
             wSword.draw(window);

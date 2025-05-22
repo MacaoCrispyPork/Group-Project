@@ -10,3 +10,5 @@ Enemy::Enemy(int r, sf::Vector2f position, float speed, int health, Weapon *weap
       xp(xp), updateInterval(updateInterval) { lastUpdate = clock(); }
 
 std::string Enemy::getType() { return "Enemy"; }
+
+int Enemy::getxp() { return xp; }

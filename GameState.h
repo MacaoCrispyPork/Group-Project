@@ -3,8 +3,8 @@
 
 enum class gameState
 {
-    Main_Menu,
-    Weapons_Menu,
+    MainMenu,
+    WeaponsMenu,
     Game,
     Death,
 };

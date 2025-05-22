@@ -4,11 +4,12 @@ Game::Game(int sizeX, int sizeY, std::string title)
 {
     win = new sf::RenderWindow(sf::VideoMode(sizeX, sizeY), title);
     Weapon *weapon = new Weapon(1, 0.2, 2, 1, 300);
-    player = new Player(10, sf::Vector2f(50, 50), 3, 1, weapon);
+    player = new Player(10, sf::Vector2f(50, 50), 3, 5, weapon);
+    score = 0;
     // Creating Enemies with randomised position
     for (int i = 0; i < 3; i++)
     {
-        all_enemies.push_back(new Skeleton(10, sf::Vector2f(rand() % sizeX + 10, rand() % sizeY + 10), 0.5, 3, new Weapon(1, 1, 10, 1, 300), .1, 0.2));
+        all_enemies.push_back(new Zombie(10, sf::Vector2f(rand() % sizeX + 10, rand() % sizeY + 10), 0.5, 3, new Weapon(1, 1, 10, 1, 300), 1, 0.2));
     }
 }
 
@@ -22,6 +23,13 @@ void Game::run()
         {
             updateGameState();
             render();
+        }
+
+        if (player->getIsDestroyed())
+        {
+            std::cout << "Game Over!" << std::endl;
+            std::cout << "Score: " << score << std::endl;
+            win->close();
         }
     }
 }
@@ -123,6 +131,7 @@ void Game::deleteDestroyedEntities()
     {
         if (all_enemies[i]->getIsDestroyed())
         {
+            score += all_enemies[i]->getxp();
             delete all_enemies[i];
             all_enemies.erase(all_enemies.begin() + i);
         }

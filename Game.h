@@ -20,6 +20,7 @@ private:
     Player *player;
     std::vector<Enemy *> all_enemies;
     std::vector<Projectile *> all_projectiles;
+    float score;
 
 public:
     Game(int sizeX, int sizeY, std::string title);
