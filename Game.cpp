@@ -3,7 +3,7 @@
 Game::Game(int sizeX, int sizeY, std::string title)
 {
     win = new sf::RenderWindow(sf::VideoMode(sizeX, sizeY), title);
-    Weapon *weapon = new Weapon(1, 0.2, 5, 1, 300);
+    Weapon *weapon = new Weapon(1, 0.2, 5, 2, 500);
     player = new Player(10, sf::Vector2f(sizeX/2, sizeY/2), 3, 5, weapon);
     score = 0;
     wave = 1;
