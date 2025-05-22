@@ -21,6 +21,7 @@ private:
     std::vector<Enemy *> all_enemies;
     std::vector<Projectile *> all_projectiles;
     float score;
+    int wave;
 
 public:
     Game(int sizeX, int sizeY, std::string title);
@@ -33,6 +34,7 @@ public:
     void deleteDestroyedEntities();
     void updateAI();
     void render();
+    void spawnWaveEnemies(int wave, int sizeX, int sizeY);
     ~Game();
 };
 
