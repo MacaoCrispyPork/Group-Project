@@ -10,7 +10,7 @@
 
 class Weapon
 {
-protected:
+private:
     int damage;
     float fireRate;
     int projSize;
