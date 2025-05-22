@@ -8,9 +8,9 @@ public:
     Skeleton();
 
     // Parameterized constructor for Skeleton
-    // Inputs: r (radius), position (spawn position), speed, health, weapon (pointer), xp (experience), updateInterval (AI update interval)
+    // Inputs: r (radius), position (spawn position), health, weapon (pointer), xp (experience), updateInterval (AI update interval)
     // Output: Skeleton object
-    Skeleton(int r, sf::Vector2f position, float speed, int health, Weapon *weapon, int xp, float updateInterval);
+    Skeleton(int r, sf::Vector2f position, int health, Weapon *weapon, int xp, float updateInterval);
 
     // Updates the AI for the skeleton and returns a projectile if it attacks
     // Input: playerPosition (current position of the player)

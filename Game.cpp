@@ -3,13 +3,32 @@
 Game::Game(int sizeX, int sizeY, std::string title)
 {
     win = new sf::RenderWindow(sf::VideoMode(sizeX, sizeY), title);
-    Weapon *weapon = new Weapon(1, 0.2, 2, 1, 300);
-    player = new Player(10, sf::Vector2f(50, 50), 3, 5, weapon);
+    Weapon *weapon = new Weapon(1, 0.2, 5, 1, 300);
+    player = new Player(10, sf::Vector2f(sizeX/2, sizeY/2), 3, 5, weapon);
     score = 0;
-    // Creating Enemies with randomised position
-    for (int i = 0; i < 3; i++)
+    wave = 1;
+    spawnWaveEnemies(wave, sizeX, sizeY);
+}
+
+void Game::spawnWaveEnemies(int wave, int sizeX, int sizeY)
+{
+    for (int i = 0; i < wave; i++)
     {
-        all_enemies.push_back(new Zombie(10, sf::Vector2f(rand() % sizeX + 10, rand() % sizeY + 10), 0.5, 3, new Weapon(1, 1, 10, 1, 300), 1, 0.2));
+        int x, y;
+        if (rand() % 2 == 0)
+            x = rand() % (sizeX / 3);
+        else
+            x = sizeX - (rand() % (sizeX / 3)) - 1;
+        if (rand() % 2 == 0)
+            y = rand() % (sizeY / 3);
+        else
+            y = sizeY - (rand() % (sizeY / 3)) - 1;
+        if (rand() % 2 == 0) {
+            all_enemies.push_back(new Skeleton(10, sf::Vector2f(x, y), 3, new Weapon(1, 0.5, 5, 2, 800), 1, 0));
+        }
+        else {
+            all_enemies.push_back(new Zombie(10, sf::Vector2f(x, y), 1, 3, new Weapon(2, 0.3, 35, 0.75, 25), 1, 0.3));
+        }
     }
 }
 
@@ -47,17 +66,21 @@ bool Game::handleEvents()
             win->close();
             break;
         case sf::Event::GainedFocus:
-            std::cout << "Gained" << std::endl;
             isFocused = true;
             break;
         case sf::Event::LostFocus:
-            std::cout << "Lost" << std::endl;
             isFocused = false;
             break;
         case sf::Event::KeyPressed:
             if (event.key.code == sf::Keyboard::Space)
             {
                 handlePlayerAttack();
+            }
+            break;
+        case sf::Event::MouseButtonPressed:
+            if (event.mouseButton.button == sf::Mouse::Right)
+            {
+                player->setDestination(static_cast<sf::Vector2f>(sf::Mouse::getPosition(*win)));
             }
             break;
         default:
@@ -79,11 +102,15 @@ void Game::handlePlayerAttack()
 
 void Game::updateGameState()
 {
-    player->setPosition(win);
     moveEntities();
     updateAI();
     handleCollisions();
     deleteDestroyedEntities();
+        if (all_enemies.empty())
+    {
+        wave++;
+        spawnWaveEnemies(wave, win->getSize().x, win->getSize().y);
+    }
 }
 
 void Game::moveEntities()
@@ -119,7 +146,7 @@ void Game::handleCollisions()
 
 void Game::deleteDestroyedEntities()
 {
-    for (int i = all_projectiles.size()-1; i >= 0; i--)
+    for (int i = all_projectiles.size() - 1; i >= 0; i--)
     {
         if (all_projectiles[i]->getIsDestroyed())
         {
@@ -127,7 +154,7 @@ void Game::deleteDestroyedEntities()
             all_projectiles.erase(all_projectiles.begin() + i);
         }
     }
-    for (int i = all_enemies.size()-1; i >= 0; i--)
+    for (int i = all_enemies.size() - 1; i >= 0; i--)
     {
         if (all_enemies[i]->getIsDestroyed())
         {
