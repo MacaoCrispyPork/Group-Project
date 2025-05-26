@@ -1,11 +1,10 @@
 #include "Game.h"
 #include <fstream>
 
-Game::Game(int sizeX, int sizeY, std::string title)
+Game::Game(int sizeX, int sizeY, std::string title, Weapon weapon)
 {
     win = new sf::RenderWindow(sf::VideoMode(sizeX, sizeY), title);
-    Weapon *weapon = new Weapon(1, 0.2, 5, 2, 500);
-    player = new Player(10, sf::Vector2f(sizeX/2, sizeY/2), 3, 5, weapon);
+    player = new Player(10, sf::Vector2f(sizeX/2, sizeY/2), 3, 5, new Weapon(weapon));
     score = 0;
     wave = 1;
     spawnWaveEnemies(wave, sizeX, sizeY);
@@ -28,7 +27,7 @@ void Game::spawnWaveEnemies(int wave, int sizeX, int sizeY)
             all_enemies.push_back(new Skeleton(10, sf::Vector2f(x, y), 3, new Weapon(1, 0.5, 5, 2, 800), 1, 0));
         }
         else {
-            all_enemies.push_back(new Zombie(10, sf::Vector2f(x, y), 1, 3, new Weapon(2, 0.3, 35, 0.75, 25), 1, 0.3));
+            all_enemies.push_back(new Zombie(10, sf::Vector2f(x, y), 1, 3, new Weapon(2, 0.5, 50, 1, 25), 1, 0.3));
         }
     }
 }

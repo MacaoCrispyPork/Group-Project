@@ -2,6 +2,7 @@
 #include "Game.h"
 #include "Button.h"
 #include "GameState.h"
+#include "Weapon.h"
 
 int main()
 {
@@ -30,8 +31,8 @@ int main()
 
     // Initialising unpressable buttons to use as textboxes.
     Button Title({0, 0}, {540, 0}, "Slayer", font);
-    Button mainDescription({0, 0}, {720, 200}, "How to Play:\nRight Click = Move\nLeft Click = Attack", font);
-    Button Weapon({0, 0}, {540, 0}, "Choose Your Weapon", font);
+    Button MainDescription({0, 0}, {720, 200}, "How to Play:\nRight Click = Move\nLeft Click = Attack", font);
+    Button ChooseWeapon({0, 0}, {540, 0}, "Choose Your Weapon", font);
     Button BowDescription({0, 0}, {360, 300}, "Ranged Weapon \naim with cursor", font);
     Button SwordDescription({0, 0}, {720, 300}, "Melee Weapon \nshort ranged \nomnidirectional attack", font);
     Button Died({0, 0}, {540, 200}, "YOU DIED", font);
@@ -71,8 +72,10 @@ int main()
                 {
                     if (wBow.isClicked(mouse) || wSword.isClicked(mouse))
                     {
+                        Weapon weapon = Weapon(2, 0.25, 50, 1, 25);
+                        if (wBow.isClicked(mouse)) { weapon = Weapon(1, 0.25, 2, 1, 400); }
                         state = gameState::Game; // Transition to the game menu
-                        Game g(1920, 1080, "Slayer");
+                        Game g(1920, 1080, "Slayer", weapon);
                         bool playerDied = g.run(); // Start the game and wait for it to end
                         if (playerDied)
                             state = gameState::Death;
@@ -98,11 +101,11 @@ int main()
             Title.draw(window);
             playBtn.draw(window);
             quitBtn.draw(window);
-            mainDescription.draw(window);
+            MainDescription.draw(window);
         }
         else if (state == gameState::WeaponsMenu)
         {
-            Weapon.draw(window);
+            ChooseWeapon.draw(window);
             wBow.draw(window);
             wSword.draw(window);
             BowDescription.draw(window);
