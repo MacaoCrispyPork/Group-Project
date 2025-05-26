@@ -39,7 +39,7 @@ The game was built with modular class architecture:
 ## 🧑‍💻 Team Members
 
 - Lilith Jackon
-- Issac Sheehan
+- Isaac Sheehan
 - Jason Liang
 
 ## Requirements:
