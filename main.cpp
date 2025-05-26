@@ -16,14 +16,12 @@ int main()
 
     // Initialising the game's state as the main menu.
     gameState state = gameState::MainMenu;
-
     // Initialising buttons for the main menu.
-    Button Title({0, 0}, {540, 0}, "Slayer", font);
+
     Button playBtn({200, 50}, {360, 200}, "Play!", font);
     Button quitBtn({200, 50}, {360, 300}, "Exit :(", font);
 
     // Initialising buttons for the weapons menu.
-    Button Weapon({0, 0}, {540, 0}, "Choose Your Weapon", font);
     Button wBow({200, 50}, {360, 200}, "Bow", font);
     Button wSword({200, 50}, {720, 200}, "Sword", font);
 
@@ -31,11 +29,13 @@ int main()
     Button Continue({200, 50}, {540, 300}, "Continue", font);
 
     // Initialising unpressable buttons to use as textboxes.
+    Button Title({0, 0}, {540, 0}, "Slayer", font);
     Button mainDescription({0, 0}, {720, 200}, "How to Play:\nRight Click = Move\nLeft Click = Attack", font);
+    Button Weapon({0, 0}, {540, 0}, "Choose Your Weapon", font);
     Button BowDescription({0, 0}, {360, 300}, "Ranged Weapon \naim with cursor", font);
     Button SwordDescription({0, 0}, {720, 300}, "Melee Weapon \nshort ranged \nomnidirectional attack", font);
     Button Died({0, 0}, {540, 200}, "YOU DIED", font);
-    
+
     // Starting the game making sure that the game window is open on the users screen.
     while (window.isOpen())
     {
@@ -46,11 +46,11 @@ int main()
             // Closes window if the user chooses to quit.
             if (event.type == sf::Event::Closed)
                 window.close();
-            
+
             // Handling mouse inputs.
             if (event.type == sf::Event::MouseButtonPressed)
             {
-                
+
                 sf::Vector2i mouse(event.mouseButton.x, event.mouseButton.y);
 
                 // Handling input for the main manu
@@ -58,33 +58,33 @@ int main()
                 {
                     if (playBtn.isClicked(mouse))
                     {
-                        state = gameState::WeaponsMenu; // Transitioning to the weapons menu 
+                        state = gameState::WeaponsMenu; // Go to the weapons menu
                     }
                     else if (quitBtn.isClicked(mouse))
                     {
-                        window.close();
+                        window.close(); // Close the game.
                     }
                 }
 
+                // Handling input ofr weapons menu
                 else if (state == gameState::WeaponsMenu)
                 {
                     if (wBow.isClicked(mouse) || wSword.isClicked(mouse))
                     {
-                        state = gameState::Game;
+                        state = gameState::Game; // Transition to the game menu
                         Game g(1920, 1080, "Slayer");
                         bool playerDied = g.run(); // Start the game and wait for it to end
                         if (playerDied)
                             state = gameState::Death;
-                        else
-                            state = gameState::MainMenu; // just in case
                     }
                 }
 
+                // Handling input for weapons menu
                 else if (state == gameState::Death)
                 {
                     if (Continue.isClicked(mouse))
                     {
-                        state = gameState::MainMenu;
+                        state = gameState::MainMenu; // Return to main menu
                     }
                 }
             }
@@ -92,6 +92,7 @@ int main()
 
         window.clear();
 
+        // Drawing the buttons and text.
         if (state == gameState::MainMenu)
         {
             Title.draw(window);
