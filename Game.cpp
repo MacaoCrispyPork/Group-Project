@@ -4,10 +4,12 @@
 Game::Game(int sizeX, int sizeY, std::string title, Weapon weapon)
 {
     win = new sf::RenderWindow(sf::VideoMode(sizeX, sizeY), title);
-    player = new Player(10, sf::Vector2f(sizeX/2, sizeY/2), 3, 5, new Weapon(weapon));
+    win->setFramerateLimit(0);
+    player = new Player(10, sf::Vector2f(sizeX/2, sizeY/2), 10, 5, new Weapon(weapon));
     score = 0;
     wave = 1;
     spawnWaveEnemies(wave, sizeX, sizeY);
+    float lastTime = 0;
 }
 
 void Game::spawnWaveEnemies(int wave, int sizeX, int sizeY)
@@ -34,49 +36,50 @@ void Game::spawnWaveEnemies(int wave, int sizeX, int sizeY)
 
 bool Game::run()
 {
+    clock.restart();
     while (win->isOpen())
     {
-        bool isFocused = handleEvents();
+        render();
 
-        if (isFocused)
+        if (clock.getElapsedTime().asSeconds() >= 1/60)
         {
+            handleEvents();
             updateGameState();
-            render();
-        }
+            
 
-        if (player->getIsDestroyed())
-        {
-            std::cout << "Game Over!" << std::endl;
-            std::cout << "Score: " << score << std::endl;
+            if (player->getIsDestroyed())
+            {
+                std::cout << "Game Over!" << std::endl;
+                std::cout << "Score: " << score << std::endl;
 
-            // High score logic
-            int highscore = 0;
-            std::ifstream infile("highscore.txt");
-            if (infile.is_open()) {
-                infile >> highscore;
-                infile.close();
-            }
-            if (score > highscore) {
-                std::ofstream outfile("highscore.txt");
-                if (outfile.is_open()) {
-                    outfile << score;
-                    outfile.close();
+                // High score logic
+                int highscore = 0;
+                std::ifstream infile("highscore.txt");
+                if (infile.is_open()) {
+                    infile >> highscore;
+                    infile.close();
                 }
-                highscore = score;
-            }
-            std::cout << "High Score: " << highscore << std::endl;
+                if (score > highscore) {
+                    std::ofstream outfile("highscore.txt");
+                    if (outfile.is_open()) {
+                        outfile << score;
+                        outfile.close();
+                    }
+                    highscore = score;
+                }
+                std::cout << "High Score: " << highscore << std::endl;
 
-            win->close();
-            return true;
+                win->close();
+                return true;
+            }
         }
     }
     return false;
 }
 
-bool Game::handleEvents()
+void Game::handleEvents()
 {
     sf::Event event;
-    bool isFocused = true;
 
     while (win->pollEvent(event))
     {
@@ -84,12 +87,6 @@ bool Game::handleEvents()
         {
         case sf::Event::Closed:
             win->close();
-            break;
-        case sf::Event::GainedFocus:
-            isFocused = true;
-            break;
-        case sf::Event::LostFocus:
-            isFocused = false;
             break;
         case sf::Event::KeyPressed:
             if (event.key.code == sf::Keyboard::Space)
@@ -108,7 +105,6 @@ bool Game::handleEvents()
         }
     }
 
-    return isFocused;
 }
 
 void Game::handlePlayerAttack()
@@ -122,15 +118,18 @@ void Game::handlePlayerAttack()
 
 void Game::updateGameState()
 {
-    moveEntities();
-    updateAI();
-    handleCollisions();
-    deleteDestroyedEntities();
-        if (all_enemies.empty())
-    {
-        wave++;
-        spawnWaveEnemies(wave, win->getSize().x, win->getSize().y);
-    }
+        moveEntities();
+        updateAI();
+        handleCollisions();
+        deleteDestroyedEntities();
+            if (all_enemies.empty())
+        {
+            wave++;
+            spawnWaveEnemies(wave, win->getSize().x, win->getSize().y);
+        }
+
+
+
 }
 
 void Game::moveEntities()

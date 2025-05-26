@@ -10,16 +10,15 @@ In this game, players must survive waves of zombies and skeletons using a variet
 
 The game was built with modular class architecture:
 
-- `Game`: Menu navigation and start game logic with the core game loop and state manager  
-- `Entity`:  
-- - `Projectile`: 
-- - `Character`: 
-- - -`Player`:   
-- - -`Enemy`: Enemy AI and collision logic 
-- - - -`Zombie` : Subclasses of Enemy chases you around doing damage on contact
-- - - -`Skeleton` : Subclasses of Enemy stays stationary on the screen shooting projectiles at you
-- `Weapon`: Every Character holds a weapon which determines the damage they do
-
+- `Game`: Menu navigation and start game logic with the core game loop and state manager.
+- `Entity`:  Everything interactive the game itself.
+- - `Projectile`: A subclass of `Entity` that is the projectiles fired by every `Character`.
+- - `Character`: A subclass of `Entity` that is every `Character` in the game.
+- - -`Player`: Subclass of `Charactert` this is you the player that you control.
+- - -`Enemy`: Subclass of `Character` containts the enemy AI. 
+- - - -`Zombie` : Subclasses of `Enemy` chases you around doing damage on contact.
+- - - -`Skeleton` : Subclasses of `Enemy` stays stationary on the screen shooting projectiles at you.
+- `Weapon`: Every `Character` holds a weapon which determines the damage they do and the size of projectile.
 
 ## 🛠️ Technologies Used
 
@@ -38,7 +37,7 @@ The game was built with modular class architecture:
 
 ## 🧑‍💻 Team Members
 
-- Lilith Jackon
+- Lilith Jackson
 - Issac Sheehan
 - Jason Liang
 

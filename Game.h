@@ -17,12 +17,14 @@
 class Game
 {
 private:
-    sf::RenderWindow *win;                     // Pointer to the SFML render window
-    Player *player;                            // Pointer to the player character
-    std::vector<Enemy *> all_enemies;          // Vector containing all enemies in the game
-    std::vector<Projectile *> all_projectiles; // Vector containing all projectiles in the game
-    float score;                               // Player's score
-    int wave;                                  // Current wave of enemies
+    sf::RenderWindow *win;
+    Player *player;
+    std::vector<Enemy *> all_enemies;
+    std::vector<Projectile *> all_projectiles;
+    float score;
+    sf::Clock clock;
+    float lastTime;
+    int wave;
 
 public:
     // Constructor
@@ -32,12 +34,7 @@ public:
     // Loops through the game logic until game ends or window is closed
     // Output: true if the player dies, false if window is closed
     bool run();
-
-    // Handles events such as player input and window events
-    // Output: true if the window is focused and events were handled, false otherwise
-    bool handleEvents();
-
-    // Attacks towards the mouse position
+    void handleEvents();
     void handlePlayerAttack();
 
     // Updates the game state by moving entities, handling collisions, and updating AI
