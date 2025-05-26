@@ -1,24 +1,45 @@
 #include <optional>
-
+#include <iostream>
 #include "Weapon.h"
 
-Weapon::Weapon() : Weapon(0, 0, 0, 0) {}
+Weapon::Weapon() : Weapon(0, 0, 0, 0, 0) {}
 
-Weapon::Weapon(int damage, int fireRate, int projSize, int projSpeed)
+Weapon::Weapon(int damage, float fireRate, int projSize, float projSpeed, float range)
     : damage(damage),
-      fireRate(fireRate), 
+      fireRate(fireRate),
       projSize(projSize), 
-      projSpeed(projSpeed) 
+      projSpeed(projSpeed),
+      range(range)
 {
     this->lastAttack = clock();
 }
 
-clock_t Weapon::getLastAttack()
+sf::Vector2f Weapon::calculateRange(sf::Vector2f position, sf::Vector2f destination)
 {
-    return lastAttack;
+    // Calculate the direction vector from position to destination
+    sf::Vector2f direction = destination - position;
+    // Normalize the direction vector
+    // If the length is zero, return the position (no movement)
+    float length = std::sqrt(direction.x * direction.x + direction.y * direction.y);
+    if (length != 0)
+    {
+        direction /= length;
+    }
+    // Scale the direction vector by the range of the weapon
+    return direction * range + position;
 }
 
-int Weapon::getFireRate()
+std::optional<Projectile> Weapon::attack(sf::Vector2f position, sf::Vector2f destination, bool isPlayer)
 {
-    return fireRate;
+    // Check if enough time has passed since the last attack
+    if (((float)(clock() - lastAttack) / CLOCKS_PER_SEC) < fireRate)
+    {
+        return std::nullopt;
+    }
+    // Update the last attack time
+    this->lastAttack = clock();
+    // Calculate the endpoint of the projectile based on the range
+    sf::Vector2f endpoint = calculateRange(position, destination);
+    // compared to Weapon the endpoint = destination
+    return std::optional<Projectile>{Projectile(projSize, position, sf::Color::Red, projSpeed, endpoint, isPlayer, damage)};
 }

@@ -1,18 +1,22 @@
-#pragma once
+#ifndef SKELETON_H
+#define SKELETON_H
 
-#include <SFML/Graphics.hpp>
-#include <cmath>
-
-#include "Weapon.h"
-#include "Character.h"
-#include "Player.h"
-#include "Entity.h"
 #include "Enemy.h"
 
 class Skeleton : public Enemy
 {
 public:
+    // Default constructor for Skeleton
     Skeleton();
-    Skeleton(int r, sf::Vector2f position, int speed, int health, Weapon *weapon, int xp);
-    std::string getType() override;
+
+    // Parameterized constructor for Skeleton
+    // Inputs: r (radius), position (spawn position), health, weapon (pointer), xp (experience), updateInterval (AI update interval)
+    // Output: Skeleton object
+    Skeleton(int r, sf::Vector2f position, int health, Weapon *weapon, int xp, float updateInterval);
+
+    // Updates the AI for the skeleton and returns a projectile if it attacks
+    // Input: playerPosition (current position of the player)
+    // Output: optional Projectile if attack occurs
+    std::optional<Projectile> updateAI(sf::Vector2f playerPosition) override;
 };
+#endif

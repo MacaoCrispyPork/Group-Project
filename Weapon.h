@@ -11,20 +11,29 @@
 class Weapon
 {
 protected:
-    int damage;
-    int fireRate;
-    int projSize;
-    int projSpeed;
-    clock_t lastAttack;
-    Projectile *projectile;
+    int damage;         // Damage dealt by the weapon
+    float fireRate;     // Minimum time between attacks (seconds)
+    int projSize;       // Size of the projectile
+    float projSpeed;    // Speed of the projectile
+    float range;        // Maximum range of the weapon
+    clock_t lastAttack; // Time of last attack
 
 public:
+    // Default constructor
     Weapon();
-    Weapon(int damage, int fireRate, int projSize, int projSpeed);
 
-    virtual std::optional<Projectile> attack(sf::Vector2f position, sf::Vector2f destination, bool isPlayer) = 0;
+    // Parameterized constructor
+    // Inputs: damage, fireRate, projSize, projSpeed, range
+    Weapon(int damage, float fireRate, int projSize, float projSpeed, float range);
 
-    clock_t getLastAttack();
-    int getFireRate();
+    // Attempts to attack in the direction of destination
+    // Inputs: position (start), destination (target), isPlayer (true if player)
+    // Output: optional Projectile if attack is possible
+    std::optional<Projectile> attack(sf::Vector2f position, sf::Vector2f destination, bool isPlayer);
+
+    // Calculates the endpoint of a projectile based on range
+    // Inputs: position (start), destination (target)
+    // Output: endpoint vector
+    sf::Vector2f calculateRange(sf::Vector2f position, sf::Vector2f destination);
 };
 #endif
