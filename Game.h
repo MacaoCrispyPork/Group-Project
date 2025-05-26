@@ -21,12 +21,14 @@ private:
     std::vector<Enemy *> all_enemies;
     std::vector<Projectile *> all_projectiles;
     float score;
+    sf::Clock clock;
+    float lastTime;
     int wave;
 
 public:
     Game(int sizeX, int sizeY, std::string title, Weapon weapon);
     bool run();
-    bool handleEvents();
+    void handleEvents();
     void handlePlayerAttack();
     void updateGameState();
     void moveEntities();

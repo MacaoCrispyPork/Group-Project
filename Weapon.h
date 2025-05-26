@@ -10,15 +10,6 @@
 
 class Weapon
 {
-<<<<<<< HEAD
-private:
-    int damage;
-    float fireRate;
-    int projSize;
-    float projSpeed;
-    float range;
-    clock_t lastAttack;
-=======
 protected:
     int damage;           // Damage dealt by the weapon
     float fireRate;       // Minimum time between attacks (seconds)
@@ -26,7 +17,6 @@ protected:
     float projSpeed;      // Speed of the projectile
     float range;          // Maximum range of the weapon
     clock_t lastAttack;   // Time of last attack
->>>>>>> 85e9158708fc3d39c3d3ac4385c186ecb857323d
 
 public:
     // Default constructor
