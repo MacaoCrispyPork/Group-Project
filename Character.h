@@ -19,6 +19,8 @@ public:
     Weapon *getWeapon();
 
     void takeDamage(int damage);
+    
+    int getHealth();
 
     void handleCollision(Projectile *projectile);
 

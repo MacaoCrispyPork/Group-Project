@@ -24,8 +24,8 @@ private:
     int wave;
 
 public:
-    Game(int sizeX, int sizeY, std::string title);
-    void run();
+    Game(int sizeX, int sizeY, std::string title, Weapon weapon);
+    bool run();
     bool handleEvents();
     void handlePlayerAttack();
     void updateGameState();
