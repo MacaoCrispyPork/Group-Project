@@ -26,6 +26,11 @@ void Character::takeDamage(int damage)
     }
 }
 
+int Character::getHealth()
+{
+    return this->health;
+}
+
 std::optional<Projectile> Character::attack(sf::Vector2f destination)
 {
     return this->weapon->attack(this->getPosition(), destination, this->isPlayer);

@@ -33,7 +33,7 @@ void Game::spawnWaveEnemies(int wave, int sizeX, int sizeY)
     }
 }
 
-void Game::run()
+bool Game::run()
 {
     while (win->isOpen())
     {
@@ -68,8 +68,10 @@ void Game::run()
             std::cout << "High Score: " << highscore << std::endl;
 
             win->close();
+            return true;
         }
     }
+    return false;
 }
 
 bool Game::handleEvents()
