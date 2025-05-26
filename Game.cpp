@@ -5,7 +5,7 @@ Game::Game(int sizeX, int sizeY, std::string title, Weapon weapon)
 {
     win = new sf::RenderWindow(sf::VideoMode(sizeX, sizeY), title);
     win->setFramerateLimit(0);
-    player = new Player(10, sf::Vector2f(sizeX/2, sizeY/2), 10, 5, new Weapon(weapon));
+    player = new Player(10, sf::Vector2f(sizeX / 2, sizeY / 2), 10, 5, new Weapon(weapon));
     score = 0;
     wave = 1;
     spawnWaveEnemies(wave, sizeX, sizeY);
@@ -25,10 +25,12 @@ void Game::spawnWaveEnemies(int wave, int sizeX, int sizeY)
             y = rand() % (sizeY / 3);
         else
             y = sizeY - (rand() % (sizeY / 3)) - 1;
-        if (rand() % 2 == 0) {
+        if (rand() % 2 == 0)
+        {
             all_enemies.push_back(new Skeleton(10, sf::Vector2f(x, y), 3, new Weapon(1, 0.5, 5, 2, 800), 1, 0));
         }
-        else {
+        else
+        {
             all_enemies.push_back(new Zombie(10, sf::Vector2f(x, y), 1, 3, new Weapon(2, 0.5, 50, 1, 25), 1, 0.3));
         }
     }
@@ -41,11 +43,10 @@ bool Game::run()
     {
         render();
 
-        if (clock.getElapsedTime().asSeconds() >= 1/60)
+        if (clock.getElapsedTime().asSeconds() >= 1 / 60)
         {
             handleEvents();
             updateGameState();
-            
 
             if (player->getIsDestroyed())
             {
@@ -55,13 +56,16 @@ bool Game::run()
                 // High score logic
                 int highscore = 0;
                 std::ifstream infile("highscore.txt");
-                if (infile.is_open()) {
+                if (infile.is_open())
+                {
                     infile >> highscore;
                     infile.close();
                 }
-                if (score > highscore) {
+                if (score > highscore)
+                {
                     std::ofstream outfile("highscore.txt");
-                    if (outfile.is_open()) {
+                    if (outfile.is_open())
+                    {
                         outfile << score;
                         outfile.close();
                     }
@@ -104,7 +108,6 @@ void Game::handleEvents()
             break;
         }
     }
-
 }
 
 void Game::handlePlayerAttack()
@@ -118,18 +121,15 @@ void Game::handlePlayerAttack()
 
 void Game::updateGameState()
 {
-        moveEntities();
-        updateAI();
-        handleCollisions();
-        deleteDestroyedEntities();
-            if (all_enemies.empty())
-        {
-            wave++;
-            spawnWaveEnemies(wave, win->getSize().x, win->getSize().y);
-        }
-
-
-
+    moveEntities();
+    updateAI();
+    handleCollisions();
+    deleteDestroyedEntities();
+    if (all_enemies.empty())
+    {
+        wave++;
+        spawnWaveEnemies(wave, win->getSize().x, win->getSize().y);
+    }
 }
 
 void Game::moveEntities()
@@ -209,6 +209,11 @@ void Game::render()
         i->draw(win);
     }
     win->display();
+}
+
+float Game::getScore()
+{
+    return score;
 }
 
 Game::~Game()

@@ -36,12 +36,15 @@ std::optional<Projectile> Character::attack(sf::Vector2f destination)
     return this->weapon->attack(this->getPosition(), destination, this->isPlayer);
 }
 
-Character::~Character() {
+Character::~Character()
+{
     delete weapon;
 }
 
-void Character::handleCollision(Projectile *projectile) {
-    if(Entity::checkCollision(projectile)) {
+void Character::handleCollision(Projectile *projectile)
+{
+    if (Entity::checkCollision(projectile))
+    {
         takeDamage(projectile->getDamage());
     }
 }

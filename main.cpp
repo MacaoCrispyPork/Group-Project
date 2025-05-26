@@ -1,4 +1,6 @@
 #include <SFML/Graphics.hpp>
+#include <string>
+#include <fstream>
 #include "Game.h"
 #include "Button.h"
 #include "GameState.h"
@@ -15,10 +17,18 @@ int main()
         return -1;
     }
 
+    int score;
+
+    // Getting High Score.
+    std::ifstream file("highscore.txt");
+    std::string line;
+    std::getline(file, line);
+    file.close();
+
     // Initialising the game's state as the main menu.
     gameState state = gameState::MainMenu;
-    // Initialising buttons for the main menu.
 
+    // Initialising buttons for the main menu.
     Button playBtn({200, 50}, {360, 200}, "Play!", font);
     Button quitBtn({200, 50}, {360, 300}, "Exit :(", font);
 
@@ -27,7 +37,7 @@ int main()
     Button wSword({200, 50}, {720, 200}, "Sword", font);
 
     // Initialising buttons for the death menu.
-    Button Continue({200, 50}, {540, 300}, "Continue", font);
+    Button Continue({200, 50}, {540, 400}, "Continue", font);
 
     // Initialising unpressable buttons to use as textboxes.
     Button Title({0, 0}, {540, 0}, "Slayer", font);
@@ -36,6 +46,8 @@ int main()
     Button BowDescription({0, 0}, {360, 300}, "Ranged Weapon \naim with cursor", font);
     Button SwordDescription({0, 0}, {720, 300}, "Melee Weapon \nshort ranged \nomnidirectional attack", font);
     Button Died({0, 0}, {540, 200}, "YOU DIED", font);
+    Button Score({0, 0}, {540, 300}, "Your Score: " + std::to_string(score), font);
+    Button HighScore({0, 0}, {540, 100}, "High Score: " + line, font);
 
     // Starting the game making sure that the game window is open on the users screen.
     while (window.isOpen())
@@ -73,11 +85,18 @@ int main()
                     if (wBow.isClicked(mouse) || wSword.isClicked(mouse))
                     {
                         Weapon weapon;
-                        if (wSword.isClicked(mouse)) { weapon = Weapon(2, 0.25, 50, 1, 25); } // Melee weapon
-                        if (wBow.isClicked(mouse)) { weapon = Weapon(1, 0.25, 2, 1, 400); } // Ranged weapon
+                        if (wSword.isClicked(mouse))
+                        {
+                            weapon = Weapon(2, 0.25, 50, 1, 25); // Melee weapon
+                        }
+                        if (wBow.isClicked(mouse))
+                        {
+                            weapon = Weapon(1, 0.25, 2, 1, 400); // Ranged weapon
+                        }
                         state = gameState::Game; // Transition to the game menu
                         Game g(1920, 1080, "Slayer", weapon);
                         bool playerDied = g.run(); // Start the game and wait for it to end
+                        score = g.getScore();
                         if (playerDied)
                             state = gameState::Death;
                     }
@@ -100,6 +119,7 @@ int main()
         if (state == gameState::MainMenu)
         {
             Title.draw(window);
+            HighScore.draw(window);
             playBtn.draw(window);
             quitBtn.draw(window);
             MainDescription.draw(window);
@@ -115,6 +135,7 @@ int main()
         else if (state == gameState::Death)
         {
             Died.draw(window);
+            Score.draw(window);
             Continue.draw(window);
         }
         window.display();

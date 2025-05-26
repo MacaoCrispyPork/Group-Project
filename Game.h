@@ -58,6 +58,8 @@ public:
     // Spawns a wave of enemies based on the current wave number
     void spawnWaveEnemies(int wave, int sizeX, int sizeY);
 
+    float getScore();
+
     // Destructor
     ~Game();
 };
