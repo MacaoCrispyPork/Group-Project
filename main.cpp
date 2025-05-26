@@ -72,8 +72,9 @@ int main()
                 {
                     if (wBow.isClicked(mouse) || wSword.isClicked(mouse))
                     {
-                        Weapon weapon = Weapon(2, 0.25, 50, 1, 25);
-                        if (wBow.isClicked(mouse)) { weapon = Weapon(1, 0.25, 2, 1, 400); }
+                        Weapon weapon;
+                        if (wSword.isClicked(mouse)) { weapon = Weapon(2, 0.25, 50, 1, 25); } // Melee weapon
+                        if (wBow.isClicked(mouse)) { weapon = Weapon(1, 0.25, 2, 1, 400); } // Ranged weapon
                         state = gameState::Game; // Transition to the game menu
                         Game g(1920, 1080, "Slayer", weapon);
                         bool playerDied = g.run(); // Start the game and wait for it to end
