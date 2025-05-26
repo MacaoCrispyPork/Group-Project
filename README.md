@@ -1,4 +1,4 @@
-## SLAYER!🗡️
+# SLAYER!🗡️
 
 A 2D point and click movement survival game developed in C++ using SFML.
 

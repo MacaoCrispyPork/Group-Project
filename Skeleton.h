@@ -1,4 +1,6 @@
-#pragma once
+#ifndef SKELETON_H
+#define SKELETON_H
+
 #include "Enemy.h"
 
 class Skeleton : public Enemy
@@ -17,3 +19,4 @@ public:
     // Output: optional Projectile if attack occurs
     std::optional<Projectile> updateAI(sf::Vector2f playerPosition) override;
 };
+#endif

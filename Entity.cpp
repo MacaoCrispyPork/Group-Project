@@ -42,10 +42,13 @@ void Entity::move()
 
 bool Entity::checkCollision(Entity *entity)
 {
+    // Check if the entity is not null and if it is not the same player type
     if (entity != nullptr && (entity->isPlayer != this->isPlayer))
     {
+        // Calculate the distance between the two entities
         sf::Vector2f relativePosition = body->getPosition() - entity->body->getPosition();
         float distance = std::sqrt((relativePosition.x * relativePosition.x) + (relativePosition.y * relativePosition.y));
+        // Return true if the distance is less than the sum of their radii
         return (distance < body->getRadius() + entity->body->getRadius());
     }
     else

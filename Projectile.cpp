@@ -26,6 +26,7 @@ int Projectile::getDamage()
 void Projectile::move(){
     Entity::move();
     sf::Vector2f distance = getPosition() - destination;
+    // If the projectile is close enough to its destination, destroy it
     if (std::sqrt(distance.x*distance.x + distance.y*distance.y) < speed/2)
     {
         isDestroyed = true;
@@ -33,6 +34,7 @@ void Projectile::move(){
 }
 
 void Projectile::handleCollision(Entity *entity) {
+    // Destroy projectile if it collides with any entity of different isPlayer status
     if(Entity::checkCollision(entity)) {
         isDestroyed = true;
     }
