@@ -1,7 +1,9 @@
 #ifndef GAMESTATE_H
 #define GAMESTATE_H
 
-enum class gameState{
+// Enum class representing the different states of the game
+enum class gameState
+{
     MainMenu,
     WeaponsMenu,
     Game,
