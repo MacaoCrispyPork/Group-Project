@@ -6,19 +6,35 @@
 
 #include "Entity.h"
 
+// Class representing a projectile in the game
 class Projectile : public Entity
 {
 private:
-    int damage;
+    int damage; // Damage dealt by the projectile
 
 public:
+    // Default constructor
     Projectile();
 
-    Projectile(int r, sf::Vector2f position, sf::Color Colour, int speed,
+    // Parameterized constructor
+    // Inputs: radius, position, color, speed, destination, isPlayer, damage
+    Projectile(int r, sf::Vector2f position, sf::Color Colour, float speed,
                sf::Vector2f destination, bool isPlayer, int damage);
 
-    std::string getType();
+    // Returns "projectile"
+    // Output: string "projectile"
+    std::string getType() override;
 
+    // Returns the damage dealt by the projectile
+    // Output: damage value
     int getDamage();
+
+    // Handles collision with another entity
+    // Inputs: pointer to another Entity object
+    void handleCollision(Entity *entity);
+
+    // Moves the projectile towards its destination by speed units
+    // Overrides the move function from Entity, marking the projectile for destruction if it reaches its destination
+    void move() override;
 };
 #endif
